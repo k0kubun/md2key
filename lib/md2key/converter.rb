@@ -7,12 +7,18 @@ module Md2key
     end
 
     def initialize(path)
-      @markdown = File.read(path)
+      @markdown = Markdown.new(path)
     end
 
     def generate_keynote!
       Keynote.activate
-      puts @markdown
+      @markdown.slides.each_with_index do |slide, index|
+        if index == 0
+          Keynote.create_master(slide.title, slide.lines.join("\n"))
+          next
+        end
+        Keynote.create_slide(slide.title, slide.lines.join("\n"))
+      end
     end
   end
 end
