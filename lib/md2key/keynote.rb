@@ -10,7 +10,7 @@ module Md2key
       end
 
       # You must provide a first slide as a master slide.
-      def create_master(title, sub)
+      def update_master(title, sub)
         tell_keynote(<<-APPLE.unindent)
           tell document 1
             tell slide 1

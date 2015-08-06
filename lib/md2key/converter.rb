@@ -14,7 +14,7 @@ module Md2key
       Keynote.activate
       @markdown.slides.each_with_index do |slide, index|
         if index == 0
-          Keynote.create_master(slide.title, slide.lines.join("\n"))
+          Keynote.update_master(slide.title, slide.lines.join("\n"))
           next
         end
         Keynote.create_slide(slide.title, slide.lines.join("\n"))
