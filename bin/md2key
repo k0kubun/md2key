@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
 $:.unshift File.expand_path('./lib', __dir__)
-require 'md2key/cli'
+require 'md2key'
 
 Md2key::CLI.start(ARGV)
