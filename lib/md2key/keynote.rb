@@ -9,6 +9,7 @@ module Md2key
         APPLE
       end
 
+      # You must provide a first slide as a master slide.
       def create_master(title, sub)
         tell_keynote(<<-APPLE.unindent)
           tell document 1
@@ -16,6 +17,16 @@ module Md2key
               set object text of default title item to "#{title}"
               set object text of default body item to "#{sub}"
             end tell
+          end tell
+        APPLE
+      end
+
+      # You must provide a second slide as a template slide.
+      # It will be deleted.
+      def delete_template_slide
+        tell_keynote(<<-APPLE.unindent)
+          tell document 1
+            delete slide 2
           end tell
         APPLE
       end

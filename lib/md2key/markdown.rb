@@ -15,16 +15,17 @@ module Md2key
       slide  = Slide.new
 
       @markdown.each_line do |line|
-        case line.chomp
+        line = line.strip
+        case line
         when /^--+$/
           slides << slide
           slide = Slide.new
-        when /^# *([^ ]+)/
+        when /^# *(.+)$/
           slide.title = $1
-        when /^- *([^ ]+)/
+        when /^- *(.+)$/
           slide.lines << $1
-        when /[^ ]/
-          slide.lines << line.chomp
+        else
+          slide.lines << line unless line.empty?
         end
       end
       slides << slide

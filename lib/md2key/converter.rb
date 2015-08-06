@@ -19,6 +19,7 @@ module Md2key
         end
         Keynote.create_slide(slide.title, slide.lines.join("\n"))
       end
+      Keynote.delete_template_slide
     end
   end
 end
