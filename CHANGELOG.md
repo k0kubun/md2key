@@ -1,3 +1,7 @@
+# v0.2.2
+
+- Activate a template slide automatically
+
 # v0.2.1
 
 - Don't skip a nested list
