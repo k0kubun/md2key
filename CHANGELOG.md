@@ -1,3 +1,8 @@
+# v0.2.0
+
+- Use redcarpet as markdown parser
+  - Support `*` list
+
 # v0.1.2
 
 - Temporarily support skipping `---`
