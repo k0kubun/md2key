@@ -7,6 +7,7 @@
 
 - Use redcarpet as markdown parser
   - Support list starting with `*`
+  - Regard `#`, `##` and `###` as the same
 
 # v0.1.2
 
