@@ -2,6 +2,9 @@ require 'unindent'
 
 module Md2key
   class Keynote
+    COVER_SLIDE_INDEX    = 1
+    TEMPLATE_SLIDE_INDEX = 2
+
     class << self
       def activate
         tell_keynote(<<-APPLE.unindent)
@@ -9,11 +12,11 @@ module Md2key
         APPLE
       end
 
-      # You must provide a first slide as a master slide.
-      def update_master(title, sub)
+      # You must provide a first slide as a cover slide.
+      def update_cover(title, sub)
         tell_keynote(<<-APPLE.unindent)
           tell document 1
-            tell slide 1
+            tell slide #{COVER_SLIDE_INDEX}
               set object text of default title item to "#{title}"
               set object text of default body item to "#{sub}"
             end tell
@@ -22,11 +25,19 @@ module Md2key
       end
 
       # You must provide a second slide as a template slide.
-      # It will be deleted.
+      # This is just a workaround to select a layout of slides.
+      # If you tell `make new slide`, your current slide's theme
+      # will be used.
+      def show_template_slide
+        tell_keynote(<<-APPLE.unindent)
+          show slide #{TEMPLATE_SLIDE_INDEX}
+        APPLE
+      end
+
       def delete_template_slide
         tell_keynote(<<-APPLE.unindent)
           tell document 1
-            delete slide 2
+            delete slide #{TEMPLATE_SLIDE_INDEX}
           end tell
         APPLE
       end

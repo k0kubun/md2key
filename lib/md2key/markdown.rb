@@ -12,11 +12,19 @@ module Md2key
       @ast     = Oga.parse_xml(xhtml)
     end
 
+    def cover
+      cached_slides.first
+    end
+
     def slides
-      @slides ||= generate_slides
+      cached_slides[1..-1]
     end
 
     private
+
+    def cached_slides
+      @cached_slides ||= generate_slides
+    end
 
     def generate_slides
       slides = []
