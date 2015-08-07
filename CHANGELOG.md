@@ -1,7 +1,12 @@
+# v0.2.1
+
+- Don't skip a nested list
+  - But still flattened
+
 # v0.2.0
 
 - Use redcarpet as markdown parser
-  - Support `*` list
+  - Support list starting with `*`
 
 # v0.1.2
 
