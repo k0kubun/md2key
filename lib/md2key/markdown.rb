@@ -17,6 +17,8 @@ module Md2key
       @markdown.each_line do |line|
         line = line.strip
         case line
+        when /^--+$/
+          # noop
         when /^# *(.+)$/
           slides << slide
           slide = Slide.new
