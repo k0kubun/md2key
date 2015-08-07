@@ -17,10 +17,9 @@ module Md2key
       @markdown.each_line do |line|
         line = line.strip
         case line
-        when /^--+$/
+        when /^# *(.+)$/
           slides << slide
           slide = Slide.new
-        when /^# *(.+)$/
           slide.title = $1
         when /^- *(.+)$/
           slide.lines << $1
@@ -29,6 +28,8 @@ module Md2key
         end
       end
       slides << slide
+      slides.shift unless slides.empty?
+      slides
     end
   end
 end
