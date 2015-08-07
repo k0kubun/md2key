@@ -38,13 +38,8 @@ module Md2key
           slides << slide
           slide.title = node.text
         when 'ul'
-          node.children.each do |child_node|
-            next unless child_node.is_a?(Oga::XML::Element)
-            next if child_node.name != 'li'
-
-            # TODO: implement nested list
-            slide.lines << child_node.inner_text.strip
-          end
+          # FIXME: support nested list
+          slide.lines += li_texts(node).flatten
         when 'p'
           slide.lines << node.text
         when 'hr'
@@ -52,6 +47,29 @@ module Md2key
         end
       end
       slides
+    end
+
+    def li_texts(ul_node)
+      return [] unless ul_node.is_a?(Oga::XML::Element)
+      return [] if ul_node.name != 'ul'
+
+      texts = []
+      ul_node.children.each do |li_node|
+        next unless li_node.is_a?(Oga::XML::Element)
+        next if li_node.name != 'li'
+
+        li_node.children.each do |node|
+          case node
+          when Oga::XML::Text
+            text = node.text.strip
+            texts << text unless text.empty?
+          when Oga::XML::Element
+            next if node.name != 'ul'
+            texts << li_texts(node)
+          end
+        end
+      end
+      texts
     end
 
     def to_xhtml(markdown)
