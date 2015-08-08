@@ -1,4 +1,4 @@
-# Md2key
+# md2key
 
 Convert your markdown to keynote.
 
