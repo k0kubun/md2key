@@ -1,5 +1,3 @@
-require 'unindent'
-
 module Md2key
   class Keynote
     COVER_SLIDE_INDEX    = 1
@@ -13,7 +11,6 @@ module Md2key
 
       def ensure_template_slide_availability
         return if slides_count >= 2
-
         execute_applescript(:void, :ensure_template_slide_availability)
       end
 
@@ -43,8 +40,8 @@ module Md2key
 
       def execute_applescript(type, script_name, *args)
         path = script_path(script_name.to_s)
+        args.map! { |arg|  "\"#{arg}\"" }
         command = "osascript #{path} #{args.join(' ')}"
-
         `#{command + ' > /dev/null'}` if type == :void
         `#{command}}`.to_i if type == :int
       end
