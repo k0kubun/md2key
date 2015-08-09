@@ -1,3 +1,9 @@
+# v0.4.1
+
+- Performance improvement
+  - Stop generating applescript every time
+  - Thanks to @bogem
+
 # v0.4.0
 
 - Support sintax-highlighted source code insert
@@ -40,6 +46,7 @@
 - Temporarily support skipping `---`
   - Still expecting users to write a format like Deckset
   - https://github.com/k0kubun/md2key/pull/2
+  - Thanks to @liubin
 
 # v0.1.1
 
