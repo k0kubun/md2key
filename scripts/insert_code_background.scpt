@@ -4,11 +4,10 @@ on run argv
 
   tell application "Keynote"
     tell the front document
-      set theSlide to slide lastIndex
       set docWidth to its width
       set docHeight to its height
 
-      tell theSlide
+      tell slide lastIndex
         make new image with properties { opacity: 80, file: theImage, width: docWidth - 180, position: { 90, 240 } }
       end tell
     end tell

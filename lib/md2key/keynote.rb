@@ -2,12 +2,14 @@ require 'unindent'
 
 module Md2key
   class Keynote
+    COVER_SLIDE_INDEX    = 1
+    TEMPLATE_SLIDE_INDEX = 2
     CODE_BACKGROUND_PATH = File.expand_path('../../assets/background.png', __dir__)
 
     class << self
       # You must provide a first slide as a cover slide.
-      def update_cover(title, sub)
-        execute_applescript('update_cover', title, sub)
+      def update_cover(title, content)
+        execute_applescript('update_slide', title, content, COVER_SLIDE_INDEX)
       end
 
       def ensure_template_slide_availability
@@ -21,16 +23,16 @@ module Md2key
       end
 
       def delete_template_slide
-        execute_applescript('delete_template_slide')
+        execute_applescript('delete_slide', TEMPLATE_SLIDE_INDEX)
       end
 
       def create_slide(title, content)
-        execute_applescript('create_slide', title, content)
+        execute_applescript('create_slide', title, content, TEMPLATE_SLIDE_INDEX)
       end
 
       # Insert image to the last slide
       def insert_image(path)
-        execute_applescript('insert_image', slides_count, path)
+        execute_applescript('insert_image', slides_count, path, TEMPLATE_SLIDE_INDEX)
       end
 
       def insert_code(code)
