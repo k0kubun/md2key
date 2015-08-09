@@ -72,6 +72,22 @@ module Md2key
         APPLE
       end
 
+      # Insert image to the last slide
+      def insert_image(path)
+        tell_keynote(<<-APPLE.unindent)
+          tell document 1
+            set theSlide to slide #{slides_count}
+            set theImage to POSIX file "#{path}"
+            set docHeight to its height
+            set docWidth to its width
+
+            tell theSlide
+              make new image with properties { file: theImage, height: docHeight * 2 / 3, position: { docWidth * 3 / 5, docHeight / 4} }
+            end tell
+          end tell
+        APPLE
+      end
+
       private
 
       def slides_count

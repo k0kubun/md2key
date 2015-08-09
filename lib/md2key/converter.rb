@@ -18,6 +18,7 @@ module Md2key
       Keynote.show_template_slide # to select a layout of slide
       @markdown.slides.each_with_index do |slide, index|
         Keynote.create_slide(slide.title, slide.lines.join('\n'))
+        Keynote.insert_image(slide.image) if slide.image
       end
 
       Keynote.delete_template_slide

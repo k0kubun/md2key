@@ -49,7 +49,13 @@ module Md2key
           # FIXME: support nested list
           slide.lines += li_texts(node).flatten
         when 'p'
-          slide.lines << node.text
+          node.children.each do |child|
+            if child.is_a?(Oga::XML::Element) && child.name == 'img'
+              slide.image = child.attribute('src').value
+              next
+            end
+            slide.lines << child.text
+          end
         when 'hr'
           # noop
         end
