@@ -24,14 +24,13 @@ module Md2key
         APPLE
       end
 
-      # You must provide a second slide as a template slide.
-      # This is just a workaround to select a layout of slides.
-      # If you tell `make new slide`, your current slide's theme
-      # will be used.
-      def show_template_slide
-        create_slide('', '') if slides_count < 2
+      def ensure_template_slide_availability
+        return if slides_count >= 2
+
         tell_keynote(<<-APPLE.unindent)
-          show slide #{TEMPLATE_SLIDE_INDEX} of document 1
+          tell document 1
+            make new slide
+          end
         APPLE
       end
 
@@ -62,8 +61,12 @@ module Md2key
       def create_slide(title, content)
         tell_keynote(<<-APPLE.unindent)
           tell document 1
-            set newSlide to make new slide
+            -- Workaround to select correct master slide. In spite of master slide can be selected by name,
+            -- name property is not limited to be unique.
+            -- So move the focus to second slide and force "make new slide" to use the exact master slide.
+            move slide #{TEMPLATE_SLIDE_INDEX} to before slide #{TEMPLATE_SLIDE_INDEX}
 
+            set newSlide to make new slide
             tell newSlide
               set object text of default title item to "#{title}"
               set object text of default body item to "#{content}"
