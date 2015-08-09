@@ -5,7 +5,7 @@ on run argv
 	tell application "Keynote"
 		tell the front document
 			set theSlide to slide (first item of argv as number)
-			set theImage to POSIX file second item of argv
+			set theImage to second item of argv as POSIX file
 			set docWidth to its width
 			set docHeight to its height
 
