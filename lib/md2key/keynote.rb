@@ -60,9 +60,9 @@ module Md2key
 
       def execute_applescript(type, script_name, *args)
         path = script_path(script_name.to_s)
-        args.map! { |arg|  "\"#{arg}\"" }
+        args.map! { |arg| %Q["#{arg}"] }
         command = "osascript #{path} #{args.join(' ')}"
-        `#{command + ' > /dev/null'}` if type == :void
+        `#{command} > /dev/null` if type == :void
         `#{command}}`.to_i if type == :int
       end
 
@@ -70,7 +70,6 @@ module Md2key
         scripts_path = File.expand_path('../../scripts', __dir__)
         File.join(scripts_path, "#{script_name}.scpt")
       end
-
     end
   end
 end
