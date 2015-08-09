@@ -1,5 +1,3 @@
-require 'unindent'
-
 module Md2key
   class Keynote
     COVER_SLIDE_INDEX    = 1
