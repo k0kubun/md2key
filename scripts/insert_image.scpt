@@ -1,13 +1,12 @@
--- First argument - slides count
--- Second argument - POSIX path
 on run argv
+  set lastIndex to item 1 of argv as number
+  set theImage  to item 2 of argv as POSIX file
+
   tell application "Keynote"
     tell the front document
       set TEMPLATE_SLIDE_INDEX to 2
 
-      set slideNumber to first item of argv as number
-      set theSlide to slide slideNumber
-      set theImage to second item of argv as POSIX file
+      set theSlide to slide lastIndex
       set docWidth to its width
       set docHeight to its height
 

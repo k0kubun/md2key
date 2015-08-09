@@ -1,6 +1,7 @@
--- First argument - title
--- Second arument - content
 on run argv
+  set slideTitle to item 1 of argv
+  set slideBody  to item 2 of argv
+
   tell application "Keynote"
     tell the front document
       -- Workaround to select correct master slide. In spite of master slide can be selected by name,
@@ -11,8 +12,8 @@ on run argv
 
       set newSlide to make new slide
       tell newSlide
-        set object text of default title item to first item of argv
-        set object text of default body item to second item of argv
+        set object text of default title item to slideTitle
+        set object text of default body item to slideBody
       end tell
     end tell
   end tell
