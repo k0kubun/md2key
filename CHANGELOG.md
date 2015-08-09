@@ -1,3 +1,8 @@
+# v0.3.3
+
+- Don't pull the Keynote window in the front
+- Always use the front document to convert
+
 # v0.3.2
 
 - You no longer need to select the second slide by hand
