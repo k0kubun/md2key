@@ -1,3 +1,7 @@
+# v0.3.2
+
+- You no longer need to select the second slide by hand
+
 # v0.3.1
 
 - Support inserting images
