@@ -60,8 +60,7 @@ module Md2key
 
       def execute_applescript(script_name, *args)
         path = script_path(script_name)
-        args.map! { |arg| %Q["#{arg}"] }
-        `osascript #{path} #{args.join(' ')}`
+        `osascript #{path} "#{args.join('" "')}"`
       end
 
       def script_path(script_name)
