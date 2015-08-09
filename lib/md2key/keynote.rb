@@ -31,7 +31,7 @@ module Md2key
       def show_template_slide
         create_slide('', '') if slides_count < 2
         tell_keynote(<<-APPLE.unindent)
-          show slide #{TEMPLATE_SLIDE_INDEX}
+          show slide #{TEMPLATE_SLIDE_INDEX} of document 1
         APPLE
       end
 
