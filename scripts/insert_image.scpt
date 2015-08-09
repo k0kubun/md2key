@@ -10,9 +10,9 @@ on run argv
       set docWidth to its width
       set docHeight to its height
 
-       -- Create temporary slide to fix the image size
+      -- Create temporary slide to fix the image size
       tell slide TEMPLATE_SLIDE_INDEX
-        set imgFile to make new image with properties { file:theImage, width:docWidth / 3 }
+        set imgFile to make new image with properties { file: theImage, width: docWidth / 3 }
         tell imgFile
           set imgWidth to its width
           set imgHeight to its width
@@ -20,7 +20,7 @@ on run argv
       end tell
 
       tell theSlide
-        make new image with properties {file:theImage, width:imgWidth, position:{ docWidth - imgWidth - 60, docHeight / 2 - imgHeight / 2 } }
+        make new image with properties { file: theImage, width: imgWidth, position: { docWidth - imgWidth - 60, docHeight / 2 - imgHeight / 2 } }
       end tell
     end tell
   end tell

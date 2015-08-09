@@ -1,8 +1,10 @@
 tell application "Keynote"
-  set n to 0
-  set theSlides to slides of the front document
-  repeat with theSlide in theSlides
-    set n to n + 1
-  end repeat
+  tell the front document
+    set n to 0
+    repeat with s in slides
+      set n to n + 1
+    end repeat
+  end tell
+
   do shell script "echo " & n
 end tell

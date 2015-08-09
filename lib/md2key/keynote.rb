@@ -12,7 +12,7 @@ module Md2key
 
       def ensure_template_slide_availability
         return if slides_count >= 2
-        execute_applescript('ensure_template_slide_availability')
+        execute_applescript('create_empty_slide')
       end
 
       # All slides after a second slide are unnecessary and deleted.
@@ -47,7 +47,7 @@ module Md2key
       end
 
       def activate_last_slide
-        execute_applescript('activate_last_slide')
+        execute_applescript('activate_slide', slides_count)
       end
 
       def paste_clipboard
