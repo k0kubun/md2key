@@ -41,6 +41,22 @@ You can separate slides with `---` just for readability.
 ![](/Applications/Keynote.app/Contents/Resources/keynote.help/Contents/Resources/GlobalArt/AppLanding_KeynoteP4.png)
 ```
 
+### Insert source code
+
+<img src='https://i.gyazo.com/7ff36be267652ab567191a6d5cae1d0f.png' width='60%'>
+
+<pre>
+# ActiveRecord::Precount
+
+```rb
+Tweet.all.precount(:favorites).each do |tweet|
+  p tweet.favorites.count
+end
+# SELECT `tweets`.* FROM `tweets`
+# SELECT COUNT(`favorites`.`tweet_id`), `favorites`.`tweet_id` FROM `favorites` ...
+```
+</pre>
+
 ## License
 
 MIT License
