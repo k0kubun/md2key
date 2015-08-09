@@ -63,7 +63,7 @@ module Md2key
         args.map! { |arg| %Q["#{arg}"] }
         command = "osascript #{path} #{args.join(' ')}"
         `#{command} > /dev/null` if type == :void
-        `#{command}}`.to_i if type == :int
+        `#{command}`.to_i if type == :int
       end
 
       def script_path(script_name)
