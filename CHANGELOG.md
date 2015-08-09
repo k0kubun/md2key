@@ -11,7 +11,7 @@
 
 # v0.4.0
 
-- Support sintax-highlighted source code insert
+- Support syntax-highlighted source code insert
 
 # v0.3.3
 
