@@ -9,7 +9,7 @@ module Md2key
       # You must provide a first slide as a cover slide.
       def update_cover(title, sub)
         tell_keynote(<<-APPLE.unindent)
-          tell document 1
+          tell the front document
             tell slide #{COVER_SLIDE_INDEX}
               set object text of default title item to "#{title}"
               set object text of default body item to "#{sub}"
@@ -22,7 +22,7 @@ module Md2key
         return if slides_count >= 2
 
         tell_keynote(<<-APPLE.unindent)
-          tell document 1
+          tell the front document
             make new slide
           end
         APPLE
@@ -31,12 +31,12 @@ module Md2key
       # All slides after a second slide are unnecessary and deleted.
       def delete_extra_slides
         tell_keynote(<<-APPLE.unindent)
-          set theSlides to slides of document 1
+          set theSlides to slides of the front document
           set n to #{slides_count}
 
           repeat with theSlide in theSlides
             if n > 2 then
-              delete slide n of document 1
+              delete slide n of the front document
             end if
 
             set n to n - 1
@@ -46,7 +46,7 @@ module Md2key
 
       def delete_template_slide
         tell_keynote(<<-APPLE.unindent)
-          tell document 1
+          tell the front document
             delete slide #{TEMPLATE_SLIDE_INDEX}
           end tell
         APPLE
@@ -54,7 +54,7 @@ module Md2key
 
       def create_slide(title, content)
         tell_keynote(<<-APPLE.unindent)
-          tell document 1
+          tell the front document
             -- Workaround to select correct master slide. In spite of master slide can be selected by name,
             -- name property is not limited to be unique.
             -- So move the focus to second slide and force "make new slide" to use the exact master slide.
@@ -72,7 +72,7 @@ module Md2key
       # Insert image to the last slide
       def insert_image(path)
         tell_keynote(<<-APPLE.unindent)
-          tell document 1
+          tell the front document
             set theSlide to slide #{slides_count}
             set theImage to POSIX file "#{path}"
             set docWidth to its width
@@ -98,7 +98,7 @@ module Md2key
       def slides_count
         tell_keynote(<<-APPLE.unindent).to_i
           set n to 0
-          set theSlides to slides of document 1
+          set theSlides to slides of the front document
           repeat with theSlide in theSlides
             set n to n + 1
           end repeat
