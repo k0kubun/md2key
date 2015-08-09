@@ -56,6 +56,11 @@ module Md2key
             end
             slide.lines << child.text
           end
+        when 'pre'
+          node.children.each do |child|
+            next if !child.is_a?(Oga::XML::Element) || child.name != 'code'
+            slide.code = Code.new(child.text, child.attribute('class').value)
+          end
         when 'hr'
           # noop
         end
@@ -87,7 +92,10 @@ module Md2key
     end
 
     def to_xhtml(markdown)
-      redcarpet = Redcarpet::Markdown.new(Redcarpet::Render::XHTML)
+      redcarpet = Redcarpet::Markdown.new(
+        Redcarpet::Render::XHTML,
+        fenced_code_blocks: true,
+      )
       redcarpet.render(markdown)
     end
   end

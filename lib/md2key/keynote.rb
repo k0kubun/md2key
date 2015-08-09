@@ -4,6 +4,7 @@ module Md2key
   class Keynote
     COVER_SLIDE_INDEX    = 1
     TEMPLATE_SLIDE_INDEX = 2
+    CODE_BACKGROUND_PATH = File.expand_path('../../assets/background.png', __dir__)
 
     class << self
       # You must provide a first slide as a cover slide.
@@ -58,7 +59,7 @@ module Md2key
             -- Workaround to select correct master slide. In spite of master slide can be selected by name,
             -- name property is not limited to be unique.
             -- So move the focus to second slide and force "make new slide" to use the exact master slide.
-            move slide #{TEMPLATE_SLIDE_INDEX} to before slide #{TEMPLATE_SLIDE_INDEX}
+            #{move_to_slide(TEMPLATE_SLIDE_INDEX)}
 
             set newSlide to make new slide
             tell newSlide
@@ -78,6 +79,7 @@ module Md2key
             set docWidth to its width
             set docHeight to its height
 
+            -- Create temporary slide to fix the image size
             tell slide #{TEMPLATE_SLIDE_INDEX}
               set imgFile to make new image with properties { file: theImage, width: docWidth / 3 }
               tell imgFile
@@ -87,13 +89,63 @@ module Md2key
             end tell
 
             tell theSlide
-              make new image with properties { file: theImage, width: imgWidth, position: { docWidth - imgWidth - 60, docHeight / 2 - imgHeight / 2} }
+              make new image with properties { file: theImage, width: imgWidth, position: { docWidth - imgWidth - 60, docHeight / 2 - imgHeight / 2 } }
             end tell
           end tell
         APPLE
       end
 
+      def insert_code(code)
+        Highlight.pbcopy_highlighted_code(code)
+        insert_code_background
+        activate_last_slide
+        paste_clipboard
+      end
+
       private
+
+      def insert_code_background
+        tell_keynote(<<-APPLE.unindent)
+          tell the front document
+            set theSlide to slide #{slides_count}
+            set theImage to POSIX file "#{CODE_BACKGROUND_PATH}"
+            set docWidth to its width
+            set docHeight to its height
+
+            tell theSlide
+              make new image with properties { opacity: 80, file: theImage, width: docWidth - 180, position: { 90, 240 } }
+            end tell
+          end tell
+        APPLE
+      end
+
+      def activate_last_slide
+        tell_keynote(<<-APPLE.unindent)
+          activate
+
+          tell the front document
+            #{move_to_slide(slides_count)}
+          end tell
+        APPLE
+      end
+
+      # Workaround to activate the slide of given index. `show slide [index]`
+      # didn't work...
+      def move_to_slide(index)
+        "move slide #{index} to before slide #{index}"
+      end
+
+      def paste_clipboard
+        execute_applescript(<<-APPLE.unindent)
+          tell application "Keynote"
+            tell application "System Events"
+              tell application process "Keynote"
+                keystroke "v" using { command down }
+              end tell
+            end tell
+          end tell
+        APPLE
+      end
 
       def slides_count
         tell_keynote(<<-APPLE.unindent).to_i

@@ -29,6 +29,7 @@ module Md2key
       @markdown.slides.each_with_index do |slide, index|
         Keynote.create_slide(slide.title, slide.lines.join('\n'))
         Keynote.insert_image(slide.image) if slide.image
+        Keynote.insert_code(slide.code) if slide.code
       end
     end
   end
