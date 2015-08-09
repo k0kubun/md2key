@@ -53,6 +53,19 @@ Headers always create a new slide.
 - I'm fine thank you
 ```
 
+### Image
+
+![](https://i.gyazo.com/c9870e72ddf35a9dbd487fad4e6968bd.png)
+
+```markdown
+# image slide
+
+- This is an example
+- You can insert an image
+
+![](/Applications/Keynote.app/Contents/Resources/keynote.help/Contents/Resources/GlobalArt/AppLanding_KeynoteP4.png)
+```
+
 ## License
 
 MIT License
