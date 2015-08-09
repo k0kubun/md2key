@@ -30,7 +30,7 @@ module Md2key
 
       # Insert image to the last slide
       def insert_image(path)
-        execute_applescript(:void, :insert_image, path)
+        execute_applescript(:void, :insert_image, slides_count, path)
       end
 
       def insert_code(code)
