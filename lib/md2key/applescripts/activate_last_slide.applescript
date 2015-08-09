@@ -1,9 +1,14 @@
 on run argv
 	tell application "Keynote"
 		activate
-		set TEMPLATE_SLIDE_INDEX to 2
+
 		tell the front document
-			move slide TEMPLATE_SLIDE_INDEX to before slide TEMPLATE_SLIDE_INDEX
+			set n to 0
+			repeat with s in slides
+				set n to n + 1
+			end repeat
+
+			move slide n to before slide n
 		end tell
 	end tell
 end run
