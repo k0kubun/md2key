@@ -6,12 +6,6 @@ module Md2key
     TEMPLATE_SLIDE_INDEX = 2
 
     class << self
-      def activate
-        tell_keynote(<<-APPLE.unindent)
-          activate
-        APPLE
-      end
-
       # You must provide a first slide as a cover slide.
       def update_cover(title, sub)
         tell_keynote(<<-APPLE.unindent)

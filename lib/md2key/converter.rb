@@ -20,7 +20,6 @@ module Md2key
     private
 
     def prepare_document_base
-      Keynote.activate
       Keynote.ensure_template_slide_availability
       Keynote.delete_extra_slides
     end
