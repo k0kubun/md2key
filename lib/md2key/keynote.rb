@@ -67,8 +67,8 @@ module Md2key
       end
 
       def script_path(script_name)
-        applescripts_path = File.expand_path('../../scripts', __dir__)
-        File.join(applescripts_path, "#{script_name}.applescript")
+        scripts_path = File.expand_path('../../scripts', __dir__)
+        File.join(scripts_path, "#{script_name}.scpt")
       end
 
     end
