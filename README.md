@@ -4,7 +4,9 @@ Convert your markdown to keynote.
 
 ## Installation
 
-`gem install md2key`
+```bash
+gem install md2key
+```
 
 ## Usage
 
