@@ -12,12 +12,14 @@ module Md2key
 
     def generate_keynote!
       Keynote.activate
-      Keynote.show_template_slide # to select a layout of slide
-
       Keynote.update_cover(@markdown.cover.title, @markdown.cover.lines.join('\n'))
+
+      Keynote.delete_extra_slides
+      Keynote.show_template_slide # to select a layout of slide
       @markdown.slides.each_with_index do |slide, index|
         Keynote.create_slide(slide.title, slide.lines.join('\n'))
       end
+
       Keynote.delete_template_slide
     end
   end

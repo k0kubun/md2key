@@ -34,6 +34,22 @@ module Md2key
         APPLE
       end
 
+      # All slides after a second slide are unnecessary and deleted.
+      def delete_extra_slides
+        tell_keynote(<<-APPLE.unindent)
+          set theSlides to slides of document 1
+          set n to #{slides_count}
+
+          repeat with theSlide in theSlides
+            if n > 2 then
+              delete slide n of document 1
+            end if
+
+            set n to n - 1
+          end repeat
+        APPLE
+      end
+
       def delete_template_slide
         tell_keynote(<<-APPLE.unindent)
           tell document 1
@@ -57,10 +73,21 @@ module Md2key
 
       private
 
+      def slides_count
+        tell_keynote(<<-APPLE.unindent)
+          set n to 0
+          set theSlides to slides of document 1
+          repeat with theSlide in theSlides
+            set n to n + 1
+          end repeat
+          do shell script "echo " & n
+        APPLE
+      end
+
       def tell_keynote(script)
         lines = [
           'tell application "Keynote"',
-          *script.split("\n").map { |l| l.prepend('  ') },
+          *script.split("\n"),
           'end tell',
         ]
         execute_applescript(lines.join("\n"))
@@ -70,7 +97,7 @@ module Md2key
         file = Tempfile.new('applescript')
         file.write(script)
         file.close
-        system('osascript', file.path)
+        `osascript #{file.path}`.strip
       ensure
         file.delete
       end
