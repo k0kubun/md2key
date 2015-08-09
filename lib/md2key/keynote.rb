@@ -78,11 +78,19 @@ module Md2key
           tell document 1
             set theSlide to slide #{slides_count}
             set theImage to POSIX file "#{path}"
-            set docHeight to its height
             set docWidth to its width
+            set docHeight to its height
+
+            tell slide #{TEMPLATE_SLIDE_INDEX}
+              set imgFile to make new image with properties { file: theImage, width: docWidth / 3 }
+              tell imgFile
+                set imgWidth to its width
+                set imgHeight to its width
+              end tell
+            end tell
 
             tell theSlide
-              make new image with properties { file: theImage, height: docHeight * 2 / 3, position: { docWidth * 3 / 5, docHeight / 4} }
+              make new image with properties { file: theImage, width: imgWidth, position: { docWidth - imgWidth - 60, docHeight / 2 - imgHeight / 2} }
             end tell
           end tell
         APPLE
