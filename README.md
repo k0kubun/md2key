@@ -9,37 +9,12 @@ Convert your markdown to keynote.
 - 3. Create a second slide to choose a slide layout
 - 4. Then execute `gem install md2key && md2key markdown.md`
 
-### Example
-
 ![](https://i.gyazo.com/9d4d00164683f516d44b3e536b3dd3e9.gif)
 
-The slides in the movie are generated from following markdown.
+### Basic example
 
-```markdown
-# The presentation
-
-@k0kubun
-
----
-
-# Hello world
-
-- I'm takashi kokubun
-- This is a pen
-
----
-
-# How are you?
-
-- I'm fine thank you
-```
-
-This is designed to be compatible with [Deckset](http://www.decksetapp.com/).
-
-### No horizontal lines
-
-Currently md2key supports a short format that does not need `---`.
-Headers always create a new slide.
+The slides in the movie can be generated with following markdown.  
+You can separate slides with `---` just for readability.
 
 ```markdown
 # The presentation
@@ -53,7 +28,7 @@ Headers always create a new slide.
 - I'm fine thank you
 ```
 
-### Image
+### Insert image
 
 <img src='https://i.gyazo.com/c9870e72ddf35a9dbd487fad4e6968bd.png' width='60%'>
 
