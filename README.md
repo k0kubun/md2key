@@ -43,6 +43,9 @@ You can separate slides with `---` just for readability.
 
 ### Insert source code
 
+If you have `highlight` command, you can insert syntax-highlighted source code.  
+If you don't have it, execute `brew install highlight`.
+
 <img src='https://i.gyazo.com/7ff36be267652ab567191a6d5cae1d0f.png' width='60%'>
 
 <pre>
