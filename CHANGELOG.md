@@ -1,7 +1,7 @@
 # v0.3.0
 
-- Extra slides are deleted automatically
-- Md2key is changed not to fail even if a second slide does not exist
+- Old extra slides before execution are deleted automatically
+- Changed not to fail even if a second slide does not exist
 
 # v0.2.2
 
