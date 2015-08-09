@@ -8,7 +8,7 @@ on run argv
 			-- So move the focus to second slide and force "make new slide" to use the exact master slide.
 			set TEMPLATE_SLIDE_INDEX to 2
 			move slide TEMPLATE_SLIDE_INDEX to before slide TEMPLATE_SLIDE_INDEX
-			
+
 			set newSlide to make new slide
 			tell newSlide
 				set object text of default title item to first item of argv
