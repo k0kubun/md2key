@@ -1,3 +1,7 @@
+# v0.4.0
+
+- Support sintax-highlighted source code insert
+
 # v0.3.3
 
 - Don't pull the Keynote window in the front
