@@ -1,3 +1,8 @@
+# v0.4.2
+
+- Internal refactorings
+- Drop unindent gem dependency
+
 # v0.4.1
 
 - Performance improvement
