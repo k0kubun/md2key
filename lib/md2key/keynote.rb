@@ -13,7 +13,7 @@ module Md2key
       def ensure_template_slide_availability
         return if slides_count >= 2
         execute_applescript(:void, :ensure_template_slide_availability)
-      en
+      end
 
       # All slides after a second slide are unnecessary and deleted.
       def delete_extra_slides
