@@ -1,3 +1,7 @@
+# v0.3.1
+
+- Support inserting images
+
 # v0.3.0
 
 - Old extra slides before execution are deleted automatically
