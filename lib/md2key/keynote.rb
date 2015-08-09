@@ -29,6 +29,7 @@ module Md2key
       # If you tell `make new slide`, your current slide's theme
       # will be used.
       def show_template_slide
+        create_slide('', '') if slides_count < 2
         tell_keynote(<<-APPLE.unindent)
           show slide #{TEMPLATE_SLIDE_INDEX}
         APPLE
@@ -74,7 +75,7 @@ module Md2key
       private
 
       def slides_count
-        tell_keynote(<<-APPLE.unindent)
+        tell_keynote(<<-APPLE.unindent).to_i
           set n to 0
           set theSlides to slides of document 1
           repeat with theSlide in theSlides
