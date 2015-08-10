@@ -13,7 +13,7 @@ on run argv
         set imgFile to make new image with properties { file: theImage, width: docWidth / 3 }
         tell imgFile
           set imgWidth to its width
-          set imgHeight to its width
+          set imgHeight to its height
         end tell
       end tell
 
