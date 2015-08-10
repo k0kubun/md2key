@@ -1,3 +1,9 @@
+# v0.4.3
+
+- Support relative path for images
+  - https://github.com/k0kubun/md2key/pull/14
+  - Thanks to @liubin
+
 # v0.4.2
 
 - Internal refactorings
