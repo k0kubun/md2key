@@ -59,7 +59,8 @@ module Md2key
         when 'pre'
           node.children.each do |child|
             next if !child.is_a?(Oga::XML::Element) || child.name != 'code'
-            slide.code = Code.new(child.text, child.attribute('class').value)
+            extension = child.attribute('class') ? child.attribute('class').value : nil
+            slide.code = Code.new(child.text, extension)
           end
         when 'hr'
           # noop
