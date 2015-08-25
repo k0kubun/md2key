@@ -1,3 +1,9 @@
+# v0.4.4
+
+- Bugfix for code listing without extension
+  - https://github.com/k0kubun/md2key/pull/17
+  - Thanks to @ainoya
+
 # v0.4.3
 
 - Support relative path for images
