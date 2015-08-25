@@ -1,10 +1,13 @@
 module Md2key
   class Highlight
+    DEFAULT_EXTENSION = "txt"
     class << self
       def pbcopy_highlighted_code(code)
         ensure_highlight_availability
 
-        file = Tempfile.new(["code", ".#{code.extension}"])
+        extension = code.extension || DEFAULT_EXTENSION
+
+        file = Tempfile.new(["code", ".#{extension}"])
         file.write(code.source)
         file.close
 
