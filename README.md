@@ -36,8 +36,6 @@ You can separate slides with `---` just for readability.
 
 ### Insert image
 
-<img src='https://i.gyazo.com/c9870e72ddf35a9dbd487fad4e6968bd.png' width='60%'>
-
 ```markdown
 # image slide
 
