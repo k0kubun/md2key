@@ -50,8 +50,7 @@ module Md2key
           slides << slide
           slide.title = node.text
         when 'ul'
-          # FIXME: support nested list
-          slide.lines += li_lines(node).flatten
+          slide.lines.concat(li_lines(node))
         when 'p'
           node.children.each do |child|
             if child.is_a?(Oga::XML::Element) && child.name == 'img'
@@ -74,7 +73,7 @@ module Md2key
     end
 
     # @return [Array<Md2Key::Line>]
-    def li_lines(ul_node)
+    def li_lines(ul_node, indent: 0)
       return [] unless ul_node.is_a?(Oga::XML::Element)
       return [] if ul_node.name != 'ul'
 
@@ -87,10 +86,10 @@ module Md2key
           case node
           when Oga::XML::Text
             text = node.text.strip
-            lines << Line.new(text) unless text.empty?
+            lines << Line.new(text, indent) unless text.empty?
           when Oga::XML::Element
             next if node.name != 'ul'
-            lines << li_lines(node)
+            lines.concat(li_lines(node, indent: indent + 1))
           end
         end
       end

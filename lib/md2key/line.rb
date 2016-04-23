@@ -4,5 +4,9 @@ module Md2key
       super
       self.indent ||= 0
     end
+
+    def indented?
+      indent > 0
+    end
   end
 end
