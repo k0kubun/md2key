@@ -98,7 +98,9 @@ module Md2key
 
     def to_xhtml(markdown)
       redcarpet = Redcarpet::Markdown.new(
-        Redcarpet::Render::XHTML,
+        Redcarpet::Render::XHTML.new(
+          escape_html: true,
+        ),
         fenced_code_blocks: true,
       )
       redcarpet.render(markdown)
