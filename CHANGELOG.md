@@ -1,3 +1,8 @@
+# v0.5.0
+
+- Support nested list
+  - https://github.com/k0kubun/md2key/pull/23
+
 # v0.4.4
 
 - Bugfix for code listing without extension
