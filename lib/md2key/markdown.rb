@@ -12,10 +12,12 @@ module Md2key
       @ast     = Oga.parse_xml(xhtml)
     end
 
+    # @return [Md2key::Slide]
     def cover
       cached_slides.first
     end
 
+    # @return [Array<Md2key::Slide>]
     def slides
       cached_slides[1..-1]
     end

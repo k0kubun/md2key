@@ -6,8 +6,14 @@ module Md2key
 
     class << self
       # You must provide a first slide as a cover slide.
-      def update_cover(title, content)
-        execute_applescript('update_slide', title, content, COVER_SLIDE_INDEX)
+      # @param [Md2key::Slide] slide
+      def update_cover(slide)
+        execute_applescript('update_slide', slide.title, slide.lines.join("\n"), COVER_SLIDE_INDEX)
+      end
+
+      # @param [Md2key::Slide] slide
+      def create_slide(slide)
+        execute_applescript('create_slide', slide.title, slide.lines.join("\n"), TEMPLATE_SLIDE_INDEX)
       end
 
       def ensure_template_slide_availability
@@ -22,10 +28,6 @@ module Md2key
 
       def delete_template_slide
         execute_applescript('delete_slide', TEMPLATE_SLIDE_INDEX)
-      end
-
-      def create_slide(title, content)
-        execute_applescript('create_slide', title, content, TEMPLATE_SLIDE_INDEX)
       end
 
       # Insert image to the last slide
