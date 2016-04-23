@@ -1,3 +1,12 @@
+# v0.5.1
+
+- Escape HTML in markdown
+  - https://github.com/k0kubun/md2key/issues/15
+  - Thanks to @liubin
+- Avoid using shell to execute AppleScript
+  - https://github.com/k0kubun/md2key/issues/16
+  - Thanks to @liubin
+
 # v0.5.0
 
 - Support nested list
