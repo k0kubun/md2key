@@ -1,3 +1,5 @@
+require 'md2key/pbcopy'
+
 module Md2key
   class Keynote
     COVER_SLIDE_INDEX    = 1
@@ -6,8 +8,19 @@ module Md2key
 
     class << self
       # You must provide a first slide as a cover slide.
-      def update_cover(title, content)
-        execute_applescript('update_slide', title, content, COVER_SLIDE_INDEX)
+      # @param [Md2key::Slide] slide
+      def update_cover(slide)
+        execute_applescript('update_slide', slide.title, slide.lines.map(&:text).join("\n"), COVER_SLIDE_INDEX)
+      end
+
+      # @param [Md2key::Slide] slide
+      def create_slide(slide)
+        if slide.lines.any?(&:indented?)
+          create_indented_slide(slide)
+        else
+          # Not using `create_indented_slide` because this is faster.
+          execute_applescript('create_slide_and_write_body', slide.title, slide.lines.map(&:text).join("\n"), TEMPLATE_SLIDE_INDEX)
+        end
       end
 
       def ensure_template_slide_availability
@@ -22,10 +35,6 @@ module Md2key
 
       def delete_template_slide
         execute_applescript('delete_slide', TEMPLATE_SLIDE_INDEX)
-      end
-
-      def create_slide(title, content)
-        execute_applescript('create_slide', title, content, TEMPLATE_SLIDE_INDEX)
       end
 
       # Insert image to the last slide
@@ -56,6 +65,24 @@ module Md2key
 
       def slides_count
         execute_applescript('slides_count').to_i
+      end
+
+      # @param [Md2key::Slide] slide
+      def create_indented_slide(slide)
+        execute_applescript('create_slide_and_select_body', slide.title, TEMPLATE_SLIDE_INDEX)
+
+        last_index = slide.lines.size - 1
+        current_indent = 0
+        slide.lines.each_with_index do |line, index|
+          # Using copy and paste to input multibyte chars
+          Pbcopy.copy(line.text)
+          paste_and_indent(line.indent - current_indent, insert_newline: index < last_index)
+          current_indent = line.indent
+        end
+      end
+
+      def paste_and_indent(indent, insert_newline: true)
+        execute_applescript('paste_and_indent', indent, insert_newline)
       end
 
       def execute_applescript(script_name, *args)

@@ -1,5 +1,7 @@
-require 'redcarpet'
+require 'md2key/line'
+require 'md2key/slide'
 require 'oga'
+require 'redcarpet'
 
 # Parse markdown, generate AST and convert it to slides.
 # This is created to be compatible with Deckset.
@@ -12,10 +14,12 @@ module Md2key
       @ast     = Oga.parse_xml(xhtml)
     end
 
+    # @return [Md2key::Slide]
     def cover
       cached_slides.first
     end
 
+    # @return [Array<Md2key::Slide>]
     def slides
       cached_slides[1..-1]
     end
@@ -46,15 +50,14 @@ module Md2key
           slides << slide
           slide.title = node.text
         when 'ul'
-          # FIXME: support nested list
-          slide.lines += li_texts(node).flatten
+          slide.lines.concat(li_lines(node))
         when 'p'
           node.children.each do |child|
             if child.is_a?(Oga::XML::Element) && child.name == 'img'
               slide.image = child.attribute('src').value
               next
             end
-            slide.lines << child.text
+            slide.lines << Line.new(child.text)
           end
         when 'pre'
           node.children.each do |child|
@@ -69,11 +72,12 @@ module Md2key
       slides
     end
 
-    def li_texts(ul_node)
+    # @return [Array<Md2Key::Line>]
+    def li_lines(ul_node, indent: 0)
       return [] unless ul_node.is_a?(Oga::XML::Element)
       return [] if ul_node.name != 'ul'
 
-      texts = []
+      lines = []
       ul_node.children.each do |li_node|
         next unless li_node.is_a?(Oga::XML::Element)
         next if li_node.name != 'li'
@@ -82,14 +86,14 @@ module Md2key
           case node
           when Oga::XML::Text
             text = node.text.strip
-            texts << text unless text.empty?
+            lines << Line.new(text, indent) unless text.empty?
           when Oga::XML::Element
             next if node.name != 'ul'
-            texts << li_texts(node)
+            lines.concat(li_lines(node, indent: indent + 1))
           end
         end
       end
-      texts
+      lines
     end
 
     def to_xhtml(markdown)
