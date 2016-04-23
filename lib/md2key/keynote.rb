@@ -8,12 +8,12 @@ module Md2key
       # You must provide a first slide as a cover slide.
       # @param [Md2key::Slide] slide
       def update_cover(slide)
-        execute_applescript('update_slide', slide.title, slide.lines.join("\n"), COVER_SLIDE_INDEX)
+        execute_applescript('update_slide', slide.title, slide.lines.map(&:text).join("\n"), COVER_SLIDE_INDEX)
       end
 
       # @param [Md2key::Slide] slide
       def create_slide(slide)
-        execute_applescript('create_slide', slide.title, slide.lines.join("\n"), TEMPLATE_SLIDE_INDEX)
+        execute_applescript('create_slide', slide.title, slide.lines.map(&:text).join("\n"), TEMPLATE_SLIDE_INDEX)
       end
 
       def ensure_template_slide_availability

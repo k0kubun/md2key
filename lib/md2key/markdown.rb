@@ -1,5 +1,7 @@
-require 'redcarpet'
+require 'md2key/line'
+require 'md2key/slide'
 require 'oga'
+require 'redcarpet'
 
 # Parse markdown, generate AST and convert it to slides.
 # This is created to be compatible with Deckset.
@@ -49,14 +51,14 @@ module Md2key
           slide.title = node.text
         when 'ul'
           # FIXME: support nested list
-          slide.lines += li_texts(node).flatten
+          slide.lines += li_lines(node).flatten
         when 'p'
           node.children.each do |child|
             if child.is_a?(Oga::XML::Element) && child.name == 'img'
               slide.image = child.attribute('src').value
               next
             end
-            slide.lines << child.text
+            slide.lines << Line.new(child.text)
           end
         when 'pre'
           node.children.each do |child|
@@ -71,11 +73,12 @@ module Md2key
       slides
     end
 
-    def li_texts(ul_node)
+    # @return [Array<Md2Key::Line>]
+    def li_lines(ul_node)
       return [] unless ul_node.is_a?(Oga::XML::Element)
       return [] if ul_node.name != 'ul'
 
-      texts = []
+      lines = []
       ul_node.children.each do |li_node|
         next unless li_node.is_a?(Oga::XML::Element)
         next if li_node.name != 'li'
@@ -84,14 +87,14 @@ module Md2key
           case node
           when Oga::XML::Text
             text = node.text.strip
-            texts << text unless text.empty?
+            lines << Line.new(text) unless text.empty?
           when Oga::XML::Element
             next if node.name != 'ul'
-            texts << li_texts(node)
+            lines << li_lines(node)
           end
         end
       end
-      texts
+      lines
     end
 
     def to_xhtml(markdown)
