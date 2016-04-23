@@ -85,9 +85,10 @@ module Md2key
         execute_applescript('paste_and_indent', indent, insert_newline)
       end
 
+      # @return [String] - script's output
       def execute_applescript(script_name, *args)
         path = script_path(script_name)
-        `osascript #{path} "#{args.join('" "')}"`
+        IO.popen(['osascript', path, *args.map(&:to_s)], &:read)
       end
 
       def script_path(script_name)
