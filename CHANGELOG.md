@@ -1,3 +1,7 @@
+# v0.5.2
+
+- Use delay before paste to prevent pasting wrong text
+
 # v0.5.1
 
 - Escape HTML in markdown
