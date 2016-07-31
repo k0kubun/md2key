@@ -1,5 +1,6 @@
 require 'md2key/line'
 require 'md2key/slide'
+require 'md2key/table'
 require 'oga'
 require 'redcarpet'
 
@@ -51,6 +52,34 @@ module Md2key
           slide.title = node.text
         when 'ul'
           slide.lines.concat(li_lines(node))
+        when 'ol'
+          slide.lines.concat(li_lines(node))
+        when 'table'
+          row_data = []
+          rows = 0
+          columns = 0
+          row_text = []
+          node.children[0].children.each do |child|
+            next if !child.is_a?(Oga::XML::Element) || child.name != 'tr'
+            rows += 1
+            child.children.each do |td|
+              next if !td.is_a?(Oga::XML::Element) || td.name != 'th'
+              columns += 1
+              row_text << td.text
+            end
+          end
+          row_data << row_text
+          node.children[1].children.each do |child|
+            next if !child.is_a?(Oga::XML::Element) || child.name != 'tr'
+            row_text = []
+            child.children.each do |td|
+              next if !td.is_a?(Oga::XML::Element) || td.name != 'td'
+              row_text << td.text
+            end
+            row_data << row_text
+            rows += 1
+          end
+          slide.table = Table.new(rows, columns, row_data)
         when 'p'
           node.children.each do |child|
             if child.is_a?(Oga::XML::Element) && child.name == 'img'
@@ -75,7 +104,7 @@ module Md2key
     # @return [Array<Md2Key::Line>]
     def li_lines(ul_node, indent: 0)
       return [] unless ul_node.is_a?(Oga::XML::Element)
-      return [] if ul_node.name != 'ul'
+      return [] if ul_node.name != 'ul' && ul_node.name != 'ol'
 
       lines = []
       ul_node.children.each do |li_node|
@@ -101,7 +130,7 @@ module Md2key
         Redcarpet::Render::XHTML.new(
           escape_html: true,
         ),
-        fenced_code_blocks: true,
+        fenced_code_blocks: true, :tables => true
       )
       redcarpet.render(markdown)
     end
