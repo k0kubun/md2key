@@ -7,17 +7,10 @@ module Md2key
 
         extension = code.extension || DEFAULT_EXTENSION
 
-        file = Tempfile.new(["code", ".#{extension}"])
-        file.write(code.source)
-        file.close
-
-        IO.popen(['highlight', '-O', 'rtf', '-K', '28', '-s', 'rdark', '-k', 'Monaco', file.path], 'r+') do |highlight|
-          IO.popen('pbcopy', 'w+') do |pbcopy|
-            pbcopy.write(highlight.read)
-          end
+        IO.popen("highlight -O rtf -K 28 -s rdark -k Monaco -S #{extension} | pbcopy", 'w+') do |highlight|
+          highlight.write(code.source)
+          highlight.close
         end
-      ensure
-        file.delete
       end
 
       private

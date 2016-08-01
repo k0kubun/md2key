@@ -27,9 +27,14 @@ module Md2key
     def generate_contents
       Keynote.update_cover(@markdown.cover)
       @markdown.slides.each_with_index do |slide, index|
-        Keynote.create_slide(slide)
-        Keynote.insert_image(slide.image) if slide.image
-        Keynote.insert_code(slide.code) if slide.code
+        if slide.table
+          Keynote.create_slide_with_table(slide, slide.table.rows, slide.table.columns)
+          Keynote.insert_table(slide.table.data)
+        else
+          Keynote.create_slide(slide)
+          Keynote.insert_image(slide.image) if slide.image
+          Keynote.insert_code(slide.code) if slide.code
+        end
       end
     end
   end

@@ -23,6 +23,11 @@ module Md2key
         end
       end
 
+      # @param [Md2key::Slide] slide
+      def create_slide_with_table(slide, rows, columns)
+        execute_applescript('create_slide_and_insert_table', slide.title, TEMPLATE_SLIDE_INDEX, rows, columns)
+      end
+
       def ensure_template_slide_availability
         return if slides_count >= 2
         execute_applescript('create_empty_slide')
@@ -47,6 +52,18 @@ module Md2key
         insert_code_background
         activate_last_slide
         paste_clipboard
+      end
+
+      def insert_table(data)
+        row_index = 1
+        data.each do |row|
+          param = [slides_count, row_index]
+          row.each do |cell|
+            param << cell
+          end
+          execute_applescript('update_table', *param)
+          row_index += 1
+        end
       end
 
       private
