@@ -18,7 +18,9 @@ on run argv
 
       set newSlide to make new slide
       tell newSlide
-        set base slide to master slide "Title - Top" of thisDocument
+        try
+          set base slide to master slide "Title - Top" of thisDocument
+        end try
         set object text of default title item to slideTitle
         set newTable to make new table with properties {column count:columnCount, row count:rowCount, footer row count:footerRowCount,header column count:headerColumnCount,header row count:headerRowCount}
       end tell
