@@ -1,3 +1,9 @@
+# v0.6.0
+
+- Add table support
+  - https://github.com/k0kubun/md2key/pull/25
+  - Thanks to @codeant
+
 # v0.5.2
 
 - Use delay before paste to prevent pasting wrong text
