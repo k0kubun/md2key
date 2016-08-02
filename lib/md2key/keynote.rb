@@ -1,4 +1,5 @@
 require 'md2key/pbcopy'
+require 'md2key/diagram'
 
 module Md2key
   class Keynote
@@ -48,10 +49,27 @@ module Md2key
       end
 
       def insert_code(code)
-        Highlight.pbcopy_highlighted_code(code)
-        insert_code_background
-        activate_last_slide
-        paste_clipboard
+        draw_diagram = false
+        prefix = ""
+        case code.extension
+        when 'mermaid'
+          draw_diagram = true
+        when 'seq', 'sequence'
+          prefix = "sequenceDiagram\n"
+          draw_diagram = true
+        else
+          Highlight.pbcopy_highlighted_code(code)
+          insert_code_background
+          activate_last_slide
+          paste_clipboard
+        end
+
+        if draw_diagram
+          code.source = prefix + code.source
+          path = Diagram.generate_image_file(code)
+          insert_image(path)
+          File.unlink(path)
+        end
       end
 
       def insert_table(data)
