@@ -64,6 +64,16 @@ end
 ```
 </pre>
 
+### Insert presenter note
+
+```markdown
+# Keynote Speech
+
+- OMG! I'm keynoting! :fearful:
+
+^ Remember, what would Freddie Mercury do? Yes, I'm Freddie! We are the champions!!
+```
+
 ## License
 
 MIT License

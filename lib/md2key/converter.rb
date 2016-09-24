@@ -35,6 +35,7 @@ module Md2key
           Keynote.insert_image(slide.image) if slide.image
           Keynote.insert_code(slide.code) if slide.code
         end
+        Keynote.insert_note(slide.note) if slide.note
       end
     end
   end

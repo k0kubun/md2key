@@ -85,6 +85,9 @@ module Md2key
             if child.is_a?(Oga::XML::Element) && child.name == 'img'
               slide.image = child.attribute('src').value
               next
+            elsif child.is_a?(Oga::XML::Text) && child.text.start_with?('^ ')
+              slide.note = child.text.sub(/^\^ /, '')
+              next
             end
             slide.lines << Line.new(child.text)
           end

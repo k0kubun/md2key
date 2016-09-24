@@ -84,6 +84,11 @@ module Md2key
         end
       end
 
+      # Insert presenter note
+      def insert_note(note)
+        execute_applescript('insert_note', slides_count, note)
+      end
+
       private
 
       def insert_code_background
