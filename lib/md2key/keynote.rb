@@ -1,5 +1,6 @@
 require 'md2key/pbcopy'
 require 'md2key/diagram'
+require 'erb'
 
 module Md2key
   class Keynote
@@ -123,12 +124,13 @@ module Md2key
       # @return [String] - script's output
       def execute_applescript(script_name, *args)
         path = script_path(script_name)
-        IO.popen(['osascript', path, *args.map(&:to_s)], &:read)
+        script = ERB.new(File.read(path)).result
+        IO.popen(['osascript', '-e', script, *args.map(&:to_s)], &:read)
       end
 
       def script_path(script_name)
         scripts_path = File.expand_path('../../scripts', __dir__)
-        File.join(scripts_path, "#{script_name}.scpt")
+        File.join(scripts_path, "#{script_name}.scpt.erb")
       end
     end
   end
