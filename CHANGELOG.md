@@ -1,3 +1,9 @@
+# v0.7.0
+
+- Support presenter notes
+  - https://github.com/k0kubun/md2key/pull/28
+  - Thanks to @amatsuda
+
 # v0.6.1
 
 - Add support to draw flowchart and sequence
