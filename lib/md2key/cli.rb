@@ -9,14 +9,14 @@ module Md2key
 
     private
 
-    # Shorthand for `md2key convert`
+    # Shorthand for `md2key convert *.md`
     def method_missing(*args)
-      return super(*args) if args.length > 1
-      default_task(args.first.to_s)
-    end
-
-    def default_task(arg)
-      convert(arg)
+      path = args.first.to_s
+      if args.length == 1 && path.end_with?('.md')
+        convert(path)
+      else
+        return super(*args)
+      end
     end
   end
 end
