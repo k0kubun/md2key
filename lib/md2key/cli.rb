@@ -1,4 +1,5 @@
 require 'md2key/config_builder'
+require 'md2key/configuration'
 require 'md2key/converter'
 require 'thor'
 require 'yaml'
@@ -7,7 +8,10 @@ module Md2key
   class CLI < Thor
     desc 'convert MARKDOWN', 'Convert markdown to keynote'
     def convert(path)
-      Converter.convert_markdown(path)
+      abort "md2key: `#{path}` does not exist" unless File.exist?(path)
+
+      config = Configuration.load
+      Converter.new(config).convert!(path)
     end
 
     desc 'init', 'Put .md2key template to current directory'
