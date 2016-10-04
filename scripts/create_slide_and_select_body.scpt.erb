@@ -1,6 +1,7 @@
 on run argv
   set slideTitle    to item 1 of argv
-  set templateIndex to item 2 of argv as number
+  set masterName    to item 2 of argv as string
+  set templateIndex to item 3 of argv as number
 
   tell application "Keynote"
     activate

@@ -11,23 +11,24 @@ module Md2key
     class << self
       # You must provide a first slide as a cover slide.
       # @param [Md2key::Slide] slide
-      def update_cover(slide)
-        execute_applescript('update_slide', slide.title, slide.lines.map(&:text).join("\n"), COVER_SLIDE_INDEX)
+      def update_cover(slide, master_name)
+        execute_applescript('update_slide', slide.title, slide.lines.map(&:text).join("\n"), master_name, COVER_SLIDE_INDEX)
       end
 
       # @param [Md2key::Slide] slide
-      def create_slide(slide)
+      # @param [String] master_name
+      def create_slide(slide, master_name)
         if slide.lines.any?(&:indented?)
-          create_indented_slide(slide)
+          create_indented_slide(slide, master_name)
         else
           # Not using `create_indented_slide` because this is faster.
-          execute_applescript('create_slide_and_write_body', slide.title, slide.lines.map(&:text).join("\n"), TEMPLATE_SLIDE_INDEX)
+          execute_applescript('create_slide_and_write_body', slide.title, slide.lines.map(&:text).join("\n"), master_name, TEMPLATE_SLIDE_INDEX)
         end
       end
 
       # @param [Md2key::Slide] slide
-      def create_slide_with_table(slide, rows, columns)
-        execute_applescript('create_slide_and_insert_table', slide.title, TEMPLATE_SLIDE_INDEX, rows, columns)
+      def create_slide_with_table(slide, rows, columns, master_name)
+        execute_applescript('create_slide_and_insert_table', slide.title, TEMPLATE_SLIDE_INDEX, rows, columns, master_name)
       end
 
       def ensure_template_slide_availability
@@ -90,6 +91,10 @@ module Md2key
         execute_applescript('insert_note', slides_count, note)
       end
 
+      def fetch_master_slide_name(slide_index)
+        execute_applescript('fetch_master_slide_name', slide_index).rstrip
+      end
+
       private
 
       def insert_code_background
@@ -109,8 +114,9 @@ module Md2key
       end
 
       # @param [Md2key::Slide] slide
-      def create_indented_slide(slide)
-        execute_applescript('create_slide_and_select_body', slide.title, TEMPLATE_SLIDE_INDEX)
+      # @param [String] master_name
+      def create_indented_slide(slide, master_name)
+        execute_applescript('create_slide_and_select_body', slide.title, master_name, TEMPLATE_SLIDE_INDEX)
 
         last_index = slide.lines.size - 1
         current_indent = 0
