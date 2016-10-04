@@ -10,12 +10,12 @@ module Md2key
 
     class << self
       # You must provide a first slide as a cover slide.
-      # @param [Md2key::Slide] slide
+      # @param [Md2key::Nodes::Slide] slide
       def update_cover(slide, master_name)
         execute_applescript('update_slide', slide.title, slide.lines.map(&:text).join("\n"), master_name, COVER_SLIDE_INDEX)
       end
 
-      # @param [Md2key::Slide] slide
+      # @param [Md2key::Nodes::Slide] slide
       # @param [String] master_name
       def create_slide(slide, master_name)
         if slide.lines.any?(&:indented?)
@@ -26,7 +26,7 @@ module Md2key
         end
       end
 
-      # @param [Md2key::Slide] slide
+      # @param [Md2key::Nodes::Slide] slide
       def create_slide_with_table(slide, rows, columns, master_name)
         execute_applescript('create_slide_and_insert_table', slide.title, TEMPLATE_SLIDE_INDEX, rows, columns, master_name)
       end
@@ -117,7 +117,7 @@ module Md2key
         execute_applescript('slides_count').to_i
       end
 
-      # @param [Md2key::Slide] slide
+      # @param [Md2key::Nodes::Slide] slide
       # @param [String] master_name
       def create_indented_slide(slide, master_name)
         execute_applescript('create_slide_and_select_body', slide.title, master_name, TEMPLATE_SLIDE_INDEX)

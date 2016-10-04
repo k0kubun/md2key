@@ -1,6 +1,4 @@
-require 'md2key/line'
-require 'md2key/slide'
-require 'md2key/table'
+require 'md2key/nodes'
 require 'oga'
 require 'redcarpet'
 
@@ -15,12 +13,12 @@ module Md2key
       @ast     = Oga.parse_xml(xhtml)
     end
 
-    # @return [Md2key::Slide]
+    # @return [Md2key::Nodes::Slide]
     def cover
       cached_slides.first
     end
 
-    # @return [Array<Md2key::Slide>]
+    # @return [Array<Md2key::Nodes::Slide>]
     def slides
       cached_slides[1..-1]
     end
@@ -33,7 +31,7 @@ module Md2key
 
     def generate_slides
       slides = []
-      slide  = Slide.new
+      slide  = Nodes::Slide.new
 
       @ast.children.each do |node|
         next unless node.is_a?(Oga::XML::Element)
@@ -45,7 +43,7 @@ module Md2key
           # more compatibility with Deckset.
           # See: https://github.com/k0kubun/md2key/pull/2
           if slides.any?
-            slide = Slide.new
+            slide = Nodes::Slide.new
           end
 
           slides << slide
@@ -80,7 +78,7 @@ module Md2key
             row_data << row_text
             rows += 1
           end
-          slide.table = Table.new(rows, columns, row_data)
+          slide.table = Nodes::Table.new(rows, columns, row_data)
         when 'p'
           node.children.each do |child|
             if child.is_a?(Oga::XML::Element) && child.name == 'img'
@@ -90,13 +88,13 @@ module Md2key
               slide.note = child.text.sub(/^\^ /, '')
               next
             end
-            slide.lines << Line.new(child.text)
+            slide.lines << Nodes::Line.new(child.text)
           end
         when 'pre'
           node.children.each do |child|
             next if !child.is_a?(Oga::XML::Element) || child.name != 'code'
             extension = child.attribute('class') ? child.attribute('class').value : nil
-            slide.code = Code.new(child.text, extension)
+            slide.code = Nodes::Code.new(child.text, extension)
           end
         when 'hr'
           # noop
@@ -105,7 +103,7 @@ module Md2key
       slides
     end
 
-    # @return [Array<Md2Key::Line>]
+    # @return [Array<Md2key::Nodes::Line>]
     def li_lines(ul_node, indent: 0)
       return [] unless ul_node.is_a?(Oga::XML::Element)
       return [] if ul_node.name != 'ul' && ul_node.name != 'ol'
@@ -119,7 +117,7 @@ module Md2key
           case node
           when Oga::XML::Text
             text = node.text.strip
-            lines << Line.new(text, indent) unless text.empty?
+            lines << Nodes::Line.new(text, indent) unless text.empty?
           when Oga::XML::Element
             next if node.name != 'ul'
             lines.concat(li_lines(node, indent: indent + 1))
@@ -134,7 +132,7 @@ module Md2key
         Redcarpet::Render::XHTML.new(
           escape_html: true,
         ),
-        fenced_code_blocks: true, :tables => true
+        fenced_code_blocks: true, tables: true
       )
       redcarpet.render(markdown)
     end
