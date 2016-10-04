@@ -1,3 +1,9 @@
+# v0.8.0
+
+- Add `md2key init` subcommand to generate .md2key
+- Allow changing master slide by .md2key
+  - See https://github.com/k0kubun/md2key/pull/32 for details
+
 # v0.7.0
 
 - Support presenter notes
