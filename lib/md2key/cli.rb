@@ -1,10 +1,21 @@
+require 'md2key/config_builder'
+require 'md2key/converter'
 require 'thor'
+require 'yaml'
 
 module Md2key
   class CLI < Thor
     desc 'convert MARKDOWN', 'Convert markdown to keynote'
     def convert(path)
       Converter.convert_markdown(path)
+    end
+
+    desc 'init', 'Put .md2key template to current directory'
+    option :skip_options, type: :boolean, default: false, aliases: %w[-n]
+    def init
+      yaml = ConfigBuilder.build(skip_options: options[:skip_options])
+      File.write('.md2key', yaml)
+      puts "# Successfully generated .md2key!\n#{yaml}"
     end
 
     private

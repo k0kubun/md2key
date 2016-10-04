@@ -95,6 +95,10 @@ module Md2key
         execute_applescript('fetch_master_slide_name', slide_index).rstrip
       end
 
+      def fetch_master_slide_names
+        execute_applescript('fetch_master_slide_names').strip.split("\n")
+      end
+
       private
 
       def insert_code_background
