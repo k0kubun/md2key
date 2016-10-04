@@ -1,0 +1,10 @@
+on run argv
+  set slideIndex to item 1 of argv as number
+
+  tell application "Keynote"
+    tell the front document
+      set masterName to the name of the base slide of slide slideIndex
+      return masterName
+    end tell
+  end tell
+end run

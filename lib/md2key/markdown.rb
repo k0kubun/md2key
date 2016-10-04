@@ -39,7 +39,7 @@ module Md2key
         next unless node.is_a?(Oga::XML::Element)
 
         case node.name
-        when /^h[1-9]$/
+        when /^h(?<level>[1-9])$/
           # New slide by header. You can skip to write `---`.
           # This feature will be removed in the future to provide
           # more compatibility with Deckset.
@@ -50,6 +50,7 @@ module Md2key
 
           slides << slide
           slide.title = node.text
+          slide.level = Regexp.last_match[:level].to_i
         when 'ul'
           slide.lines.concat(li_lines(node))
         when 'ol'

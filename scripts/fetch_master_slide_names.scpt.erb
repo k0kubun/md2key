@@ -1,0 +1,11 @@
+tell application "Keynote"
+  tell the front document
+    set the ret to ""
+
+    set the masterSlideNames to the name of every master slide
+    repeat with masterName in the masterSlideNames
+      set the ret to ret & "\n" & masterName
+    end repeat
+    return ret
+  end tell
+end tell
