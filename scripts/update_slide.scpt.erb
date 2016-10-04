@@ -6,6 +6,7 @@ on run argv
 
   tell application "Keynote"
     tell the front document
+      set the base slide of the slide slideIndex to master slide masterName
       tell slide slideIndex
         set object text of default title item to slideTitle
         set object text of default body item to slideBody

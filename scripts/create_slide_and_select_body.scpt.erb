@@ -12,7 +12,7 @@ on run argv
       -- So move the focus to second slide and force "make new slide" to use the exact master slide.
       move slide templateIndex to before slide templateIndex
 
-      set newSlide to make new slide
+      set newSlide to make new slide with properties {base slide:master slide masterName}
       tell newSlide
         set object text of default title item to slideTitle
 
