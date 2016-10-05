@@ -1,5 +1,6 @@
-require 'md2key/diagram'
 require 'erb'
+require 'md2key/diagram'
+require 'md2key/highlight'
 
 module Md2key
   class Keynote
