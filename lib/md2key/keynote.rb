@@ -1,6 +1,6 @@
-require 'md2key/pbcopy'
-require 'md2key/diagram'
 require 'erb'
+require 'md2key/diagram'
+require 'md2key/highlight'
 
 module Md2key
   class Keynote
@@ -10,12 +10,12 @@ module Md2key
 
     class << self
       # You must provide a first slide as a cover slide.
-      # @param [Md2key::Slide] slide
+      # @param [Md2key::Nodes::Slide] slide
       def update_cover(slide, master_name)
         execute_applescript('update_slide', slide.title, slide.lines.map(&:text).join("\n"), master_name, COVER_SLIDE_INDEX)
       end
 
-      # @param [Md2key::Slide] slide
+      # @param [Md2key::Nodes::Slide] slide
       # @param [String] master_name
       def create_slide(slide, master_name)
         if slide.lines.any?(&:indented?)
@@ -26,7 +26,7 @@ module Md2key
         end
       end
 
-      # @param [Md2key::Slide] slide
+      # @param [Md2key::Nodes::Slide] slide
       def create_slide_with_table(slide, rows, columns, master_name)
         execute_applescript('create_slide_and_insert_table', slide.title, TEMPLATE_SLIDE_INDEX, rows, columns, master_name)
       end
@@ -117,7 +117,7 @@ module Md2key
         execute_applescript('slides_count').to_i
       end
 
-      # @param [Md2key::Slide] slide
+      # @param [Md2key::Nodes::Slide] slide
       # @param [String] master_name
       def create_indented_slide(slide, master_name)
         execute_applescript('create_slide_and_select_body', slide.title, master_name, TEMPLATE_SLIDE_INDEX)
@@ -126,9 +126,16 @@ module Md2key
         current_indent = 0
         slide.lines.each_with_index do |line, index|
           # Using copy and paste to input multibyte chars
-          Pbcopy.copy(line.text)
+          pbcopy(line.text)
           paste_and_indent(line.indent - current_indent, insert_newline: index < last_index)
           current_indent = line.indent
+        end
+      end
+
+      def pbcopy(str)
+        IO.popen('pbcopy', 'w') do |io|
+          io.write(str)
+          io.close_write
         end
       end
 
