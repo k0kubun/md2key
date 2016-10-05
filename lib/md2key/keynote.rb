@@ -1,4 +1,3 @@
-require 'md2key/pbcopy'
 require 'md2key/diagram'
 require 'erb'
 
@@ -126,9 +125,16 @@ module Md2key
         current_indent = 0
         slide.lines.each_with_index do |line, index|
           # Using copy and paste to input multibyte chars
-          Pbcopy.copy(line.text)
+          pbcopy(line.text)
           paste_and_indent(line.indent - current_indent, insert_newline: index < last_index)
           current_indent = line.indent
+        end
+      end
+
+      def pbcopy(str)
+        IO.popen('pbcopy', 'w') do |io|
+          io.write(str)
+          io.close_write
         end
       end
 
