@@ -1,11 +1,12 @@
+require 'md2key/configuration'
 require 'md2key/keynote'
 
 module Md2key
   class Converter
     attr_reader :config
 
-    def initialize(config)
-      @config = config
+    def initialize
+      @config = Configuration.load
     end
 
     # @param [Md2key::Nodes::Presentation] ast

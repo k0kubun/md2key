@@ -1,5 +1,4 @@
 require 'md2key/config_builder'
-require 'md2key/configuration'
 require 'md2key/converter'
 require 'md2key/parser'
 require 'thor'
@@ -11,9 +10,8 @@ module Md2key
     def convert(path)
       abort "md2key: `#{path}` does not exist" unless File.exist?(path)
 
-      config = Configuration.load
       ast = Parser.new(path).parse
-      Converter.new(config).convert!(ast)
+      Converter.new.convert!(ast)
     end
 
     desc 'init', 'Put .md2key template to current directory'
