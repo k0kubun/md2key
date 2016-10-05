@@ -10,7 +10,8 @@ module Md2key
     def convert(path)
       abort "md2key: `#{path}` does not exist" unless File.exist?(path)
 
-      ast = Parser.new(path).parse
+      markdown = File.read(path)
+      ast = Parser.new.parse(markdown)
       Converter.new.convert!(ast)
     end
 

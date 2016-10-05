@@ -7,26 +7,22 @@ require 'redcarpet'
 # See: http://www.decksetapp.com/cheatsheet/
 module Md2key
   class Parser
-    def initialize(path)
-      markdown = File.read(path)
-      xhtml    = to_xhtml(markdown)
-      @ast     = Oga.parse_xml(xhtml)
-    end
-
+    # @param  [String] markdown
     # @return [Md2key::Nodes::Presentation] ast
-    def parse
-      slides = parse_slides
+    def parse(markdown)
+      slides = parse_slides(markdown)
       cover  = slides.delete_at(0)
       Nodes::Presentation.new(cover, slides)
     end
 
     private
 
-    def parse_slides
+    def parse_slides(markdown)
       slides = []
       slide  = Nodes::Slide.new
 
-      @ast.children.each do |node|
+      html_nodes = Oga.parse_xml(to_xhtml(markdown))
+      html_nodes.children.each do |node|
         next unless node.is_a?(Oga::XML::Element)
 
         case node.name
