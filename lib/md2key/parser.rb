@@ -2,34 +2,27 @@ require 'md2key/nodes'
 require 'oga'
 require 'redcarpet'
 
-# Parse markdown, generate AST and convert it to slides.
-# This is created to be compatible with Deckset.
+# Parse markdown and generate AST.
+# This is created to be compatible with Deckset as far as possible.
 # See: http://www.decksetapp.com/cheatsheet/
 module Md2key
-  class Markdown
+  class Parser
     def initialize(path)
       markdown = File.read(path)
       xhtml    = to_xhtml(markdown)
       @ast     = Oga.parse_xml(xhtml)
     end
 
-    # @return [Md2key::Nodes::Slide]
-    def cover
-      cached_slides.first
-    end
-
-    # @return [Array<Md2key::Nodes::Slide>]
-    def slides
-      cached_slides[1..-1]
+    # @return [Md2key::Nodes::Presentation] ast
+    def parse
+      slides = parse_slides
+      cover  = slides.delete_at(0)
+      Nodes::Presentation.new(cover, slides)
     end
 
     private
 
-    def cached_slides
-      @cached_slides ||= generate_slides
-    end
-
-    def generate_slides
+    def parse_slides
       slides = []
       slide  = Nodes::Slide.new
 

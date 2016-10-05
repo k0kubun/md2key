@@ -1,8 +1,7 @@
 require 'md2key/config_builder'
 require 'md2key/configuration'
 require 'md2key/converter'
-require 'md2key/markdown'
-require 'md2key/nodes'
+require 'md2key/parser'
 require 'thor'
 require 'yaml'
 
@@ -13,8 +12,7 @@ module Md2key
       abort "md2key: `#{path}` does not exist" unless File.exist?(path)
 
       config = Configuration.load
-      markdown = Markdown.new(path)
-      ast = Nodes::Presentation.new(markdown.cover, markdown.slides)
+      ast = Parser.new(path).parse
       Converter.new(config).convert!(ast)
     end
 
