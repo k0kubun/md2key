@@ -147,7 +147,11 @@ module Md2key
       def execute_applescript(script_name, *args)
         path = script_path(script_name)
         script = ERB.new(File.read(path)).result
-        IO.popen(['osascript', '-e', script, *args.map(&:to_s)], &:read)
+        IO.popen(['osascript', '-', *args.map(&:to_s)], 'r+') do |io|
+          io.write(script)
+          io.close_write
+          io.read
+        end
       end
 
       def script_path(script_name)
