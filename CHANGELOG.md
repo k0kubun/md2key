@@ -1,3 +1,7 @@
+# v0.8.1
+
+- Fix bug in converting nested list
+
 # v0.8.0
 
 - Add `md2key init` subcommand to generate .md2key
