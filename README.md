@@ -92,7 +92,7 @@ sequenceDiagram
 ```
 ```
 
-<img src='https://cloud.githubusercontent.com/assets/25447/20176180/a23374c4-a757-11e6-928c-c66c50d73612.png' width='60%'>
+<img src='https://cloud.githubusercontent.com/assets/25447/20176322/5433159e-a758-11e6-8afb-e857a3e5dd0c.png' width='60%'>
 
 ### Insert presenter note
 
