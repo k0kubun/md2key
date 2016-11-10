@@ -52,7 +52,7 @@ If you don't have it, execute `brew install highlight`.
 
 <img src='https://i.gyazo.com/7ff36be267652ab567191a6d5cae1d0f.png' width='60%'>
 
-<!-- <pre>
+<pre>
 # ActiveRecord::Precount
 
 ```rb
@@ -62,7 +62,7 @@ end
 # SELECT `tweets`.* FROM `tweets`
 # SELECT COUNT(`favorites`.`tweet_id`), `favorites`.`tweet_id` FROM `favorites` ...
 ```
-</pre> -->
+</pre>
 
 ### Insert table
 ```markdown
@@ -77,7 +77,7 @@ end
 
 
 ### Insert flowchart & sequence diagram
-```markdown
+<pre>
 ## flowchart & sequence diagram slide
 
 ```mermaid
@@ -90,7 +90,7 @@ sequenceDiagram
     Alice->John the Long: Yes... John, how are you?
     John the Long-->Alice: Better then you!
 ```
-```
+</pre>
 
 <img src='https://cloud.githubusercontent.com/assets/25447/20176322/5433159e-a758-11e6-8afb-e857a3e5dd0c.png' width='60%'>
 
