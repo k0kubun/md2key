@@ -64,6 +64,36 @@ end
 ```
 </pre>
 
+### Insert table
+```markdown
+## table
+
+| a | b | c |
+|:--|:--|:--|
+| 1 | 2 | 3 |
+```
+
+<img src='https://cloud.githubusercontent.com/assets/2607541/17286996/8dd4fdec-57ff-11e6-8766-cf35eacd363e.png' width='60%'>
+
+
+### Insert flowchart & sequence diagram
+<pre>
+## flowchart & sequence diagram slide
+
+```mermaid
+sequenceDiagram
+    Alice->Bob: Hello Bob, how are you?
+    Note right of Bob: Bob thinks
+    Bob-->Alice: I am good thanks!
+    Bob-->John the Long: How about you John?
+    Bob-->Alice: Checking with John...
+    Alice->John the Long: Yes... John, how are you?
+    John the Long-->Alice: Better then you!
+```
+</pre>
+
+<img src='https://cloud.githubusercontent.com/assets/25447/20176322/5433159e-a758-11e6-8afb-e857a3e5dd0c.png' width='60%'>
+
 ### Insert presenter note
 
 ```markdown
