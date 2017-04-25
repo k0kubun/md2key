@@ -17,6 +17,8 @@ gem install md2key
 
 ![](https://i.gyazo.com/9d4d00164683f516d44b3e536b3dd3e9.gif)
 
+## Features
+
 ### Basic example
 
 The slides in the movie can be generated with following markdown.  
@@ -29,6 +31,7 @@ You can separate slides with `---` just for readability.
 ## Hello world
 - I'm takashi kokubun
 - This is a pen
+  - Nested item is available
 
 ## How are you?
 - I'm fine thank you
@@ -103,6 +106,14 @@ sequenceDiagram
 
 ^ Remember, what would Freddie Mercury do? Yes, I'm Freddie! We are the champions!!
 ```
+
+## Experimental Features
+
+### Configure master slide by header level
+
+You can change master slide by header level if you have `.md2key`.
+
+See [#32](https://github.com/k0kubun/md2key/pull/32) for details.
 
 ## License
 
