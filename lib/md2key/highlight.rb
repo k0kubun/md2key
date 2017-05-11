@@ -7,7 +7,7 @@ module Md2key
 
         extension = code.extension || DEFAULT_EXTENSION
 
-        IO.popen("highlight -O rtf -K 28 -s rdark -k Monaco -S #{extension} | pbcopy", 'w+') do |highlight|
+        IO.popen("highlight -O rtf -K 28 -s rdark -k Monaco -S #{extension} -u utf-8 | pbcopy", 'w+') do |highlight|
           highlight.write(code.source)
           highlight.close
         end
