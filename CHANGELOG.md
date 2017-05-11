@@ -1,3 +1,7 @@
+# v0.8.2
+
+- Allow highlighting UTF-8 source code
+
 # v0.8.1
 
 - Fix bug in converting nested list
