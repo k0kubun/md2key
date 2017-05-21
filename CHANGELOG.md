@@ -1,3 +1,7 @@
+# v0.8.3
+
+- Resurrect Ruby 2.0.0 support to work on macOS's default environment
+
 # v0.8.2
 
 - Allow highlighting UTF-8 source code
