@@ -1,0 +1,9 @@
+language: ruby
+os: osx
+cache: bundler
+rvm: 2.0.0
+branches:
+  only:
+    - master
+script:
+  - "bundle exec exe/md2key" # Test only syntax and basic functionality
