@@ -11,7 +11,7 @@ module Md2key
 
       private
 
-      def build_master_config(master_name, index, skip_options:)
+      def build_master_config(master_name, index, skip_options: true)
         "  - name: #{master_name.inspect}\n".tap do |config|
           next if skip_options
 
