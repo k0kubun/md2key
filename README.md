@@ -1,4 +1,4 @@
-# md2key
+# md2key [![Build Status](https://travis-ci.org/k0kubun/md2key.svg?branch=master)](https://travis-ci.org/k0kubun/md2key)
 
 Convert your markdown to keynote.
 
