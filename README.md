@@ -107,6 +107,12 @@ sequenceDiagram
 ^ Remember, what would Freddie Mercury do? Yes, I'm Freddie! We are the champions!!
 ```
 
+### Configure master slide by header level (experimental)
+
+You can change master slide by header level if you have `.md2key`.
+
+See [#32](https://github.com/k0kubun/md2key/pull/32) for details.
+
 ## Templates
 
 We have created a default template you can instantly [download](./assets/default.key) and use. Also, you can continous reading for learning how to create your own templates.
@@ -124,14 +130,6 @@ Follow the following steps:
 **Important:** In order to make md2key replaces the layout correctly you have to select `title` and `body` from the master template (See figure 1)
 
 <img src='https://github.com/ferreiro/md2key/blob/master/assets/setup_master_slide.png?raw=true' width='40%'>
-
-## Experimental Features
-
-### Configure master slide by header level
-
-You can change master slide by header level if you have `.md2key`.
-
-See [#32](https://github.com/k0kubun/md2key/pull/32) for details.
 
 ## License
 
