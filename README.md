@@ -107,6 +107,24 @@ sequenceDiagram
 ^ Remember, what would Freddie Mercury do? Yes, I'm Freddie! We are the champions!!
 ```
 
+## Templates
+
+We have created a default template you can instantly [download](./assets/default.key) and use. Also, you can continous reading for learning how to create your own templates.
+
+### Creating your own template
+
+Follow the following steps:
+
+1. Open keynote application.
+2. Create empty presentation.
+3. Add **two master slides** (required) to the empty presentation:
+  - First slide is the cover.
+  - Second slide is the layout.
+
+**Important:** In order to make md2key replaces the layout correctly you have to select `title` and `body` from the master template (See figure 1)
+
+<img src='https://github.com/ferreiro/md2key/blob/master/assets/setup_master_slide.png?raw=true' width='40%'>
+
 ## Experimental Features
 
 ### Configure master slide by header level
