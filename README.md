@@ -115,7 +115,7 @@ See [#32](https://github.com/k0kubun/md2key/pull/32) for details.
 
 ## Templates
 
-We have created a default template you can instantly [download](./assets/default.key) and use. Also, you can continous reading for learning how to create your own templates.
+We have created a default template you can instantly [download](https://github.com/k0kubun/md2key/blob/master/assets/default.key?raw=true) and use. Also, you can continous reading for learning how to create your own templates.
 
 ### Creating your own template
 
