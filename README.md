@@ -113,11 +113,7 @@ You can change master slide by header level if you have `.md2key`.
 
 See [#32](https://github.com/k0kubun/md2key/pull/32) for details.
 
-## Templates
-
-We have created a default template you can instantly [download](https://github.com/k0kubun/md2key/blob/master/assets/default.key?raw=true) and use. Also, you can continous reading for learning how to create your own templates.
-
-### Creating your own template
+## Creating your own template
 
 Follow the following steps:
 
@@ -127,7 +123,11 @@ Follow the following steps:
   - First slide is the cover.
   - Second slide is the layout.
 
-**Important:** In order to make md2key replaces the texts correctly you have to select `Title` and `Body` from the master template.
+### Sample
+You can start to modify and learn from [assets/default.key](https://github.com/k0kubun/md2key/blob/master/assets/default.key?raw=true).
+
+### Important tips
+In order to make md2key replaces the texts correctly you have to select `Title` and `Body` from the master template.
 
 <img src='https://github.com/k0kubun/md2key/blob/master/assets/setup_master_slide.png?raw=true' width='40%'>
 
