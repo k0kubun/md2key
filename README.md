@@ -123,8 +123,7 @@ Follow the following steps:
 
 **Important:** In order to make md2key replaces the layout correctly you have to select `title` and `body` from the master template (See figure 1)
 
-[](./)
-
+<img src='https://github.com/ferreiro/md2key/blob/master/assets/setup_master_slide.png?raw=true' width='40%'>
 
 ## Experimental Features
 
