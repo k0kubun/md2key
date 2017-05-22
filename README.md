@@ -127,9 +127,9 @@ Follow the following steps:
   - First slide is the cover.
   - Second slide is the layout.
 
-**Important:** In order to make md2key replaces the layout correctly you have to select `title` and `body` from the master template (See figure 1)
+**Important:** In order to make md2key replaces the texts correctly you have to select `Title` and `Body` from the master template.
 
-<img src='https://github.com/ferreiro/md2key/blob/master/assets/setup_master_slide.png?raw=true' width='40%'>
+<img src='https://github.com/k0kubun/md2key/blob/master/assets/setup_master_slide.png?raw=true' width='40%'>
 
 ## License
 
