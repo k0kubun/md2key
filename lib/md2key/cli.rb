@@ -3,7 +3,6 @@ require 'md2key/converter'
 require 'md2key/parser'
 require 'thor'
 require 'yaml'
-require 'listen'
 
 module Md2key
   class CLI < Thor
@@ -26,6 +25,7 @@ module Md2key
 
     desc 'listen', 'Update the *.key file when each saves'
     def listen(path)
+      require 'listen'
       puts 'Watching the *.md file...'
       listener = Listen.to('./', only: /\.md$/) do |_|
         convert(path) && (puts "The *.key file has been updated. let's open *.key file!")
