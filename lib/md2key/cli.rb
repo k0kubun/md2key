@@ -3,6 +3,7 @@ require 'md2key/converter'
 require 'md2key/parser'
 require 'thor'
 require 'yaml'
+require 'listen'
 
 module Md2key
   class CLI < Thor
@@ -21,6 +22,18 @@ module Md2key
       yaml = ConfigBuilder.build(skip_options: options[:skip_options])
       File.write('.md2key', yaml)
       puts "# Successfully generated .md2key!\n#{yaml}"
+    end
+
+    desc 'listen', 'Update the *.key file when each saves'
+    def listen(path)
+      puts 'Watching the *.md file...'
+      listener = Listen.to('./', only: /\.md$/) do |_|
+        convert(path) && (puts "The *.key file has been updated. let's open *.key file!")
+      end
+      listener.start
+      sleep
+    rescue Interrupt
+      puts 'Bye.'
     end
 
     private
