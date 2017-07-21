@@ -1,3 +1,9 @@
+# v0.8.4
+
+- Add `md2key listen` subcommand to update Keynote by watching file
+  - https://github.com/k0kubun/md2key/pull/44
+  - Thanks to @sachin21
+
 # v0.8.3
 
 - Resurrect Ruby 2.0.0 support to work on macOS's default environment
