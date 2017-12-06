@@ -3,10 +3,10 @@ require 'yaml'
 module Md2key
   class Configuration
     class Master
-      # @param [String] name
+      # @param [String] name - TODO: reject `nil` after Ruby 2.0 support is dropped
       # @param [TrueClass,FalseClass,nil] cover
       # @param [Integer,nil] template
-      def initialize(name:, cover: nil, template: nil)
+      def initialize(name: nil, cover: nil, template: nil)
         @name = name
         @cover = cover
         @template = template
