@@ -91,10 +91,13 @@ module Md2key
         execute_applescript('insert_note', slides_count, note)
       end
 
+      # @param [Integer] slide_index
+      # @return [String]
       def fetch_master_slide_name(slide_index)
         execute_applescript('fetch_master_slide_name', slide_index).rstrip
       end
 
+      # @return [Array<String>]
       def fetch_master_slide_names
         execute_applescript('fetch_master_slide_names').strip.split("\n")
       end
