@@ -1,4 +1,5 @@
 require 'md2key/config_builder'
+require 'md2key/config_loader'
 require 'md2key/parser'
 require 'md2key/renderer'
 require 'thor'
@@ -11,7 +12,7 @@ module Md2key
       abort "md2key: `#{path}` does not exist" unless File.exist?(path)
 
       markdown = File.read(path)
-      config = Configuration.load
+      config = ConfigLoader.load
       ast = Parser.new.parse(markdown)
       Renderer.new(config).render!(ast)
     end
