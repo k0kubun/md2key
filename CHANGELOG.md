@@ -1,3 +1,7 @@
+# v0.9.1
+
+- Resurrect Ruby 2.0.0 support which is accidentally dropped in v0.9.0
+
 # v0.9.0
 
 - Use master slides named "cover", "h1", "h2", ...
