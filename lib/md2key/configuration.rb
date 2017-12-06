@@ -21,6 +21,7 @@ module Md2key
       validate!
     end
 
+    # @return [String,nil]
     def cover_master
       master = @masters.find do |master|
         master.cover
@@ -28,6 +29,8 @@ module Md2key
       master && master.name
     end
 
+    # @param [Integer] level
+    # @return [String,nil]
     def slide_master(level)
       master = @masters.find do |master|
         master.template == level
