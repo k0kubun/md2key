@@ -17,6 +17,14 @@ gem install md2key
 
 ![](https://i.gyazo.com/9d4d00164683f516d44b3e536b3dd3e9.gif)
 
+## Advanced Usage
+
+1. Open master slide editor
+2. Name "cover", "h1", "h2" ... "h5" to master slides
+3. They will be used for the first slide, and other slides with `#`, `##` ... `#####`
+
+![](./assets/advanced.gif)
+
 ## Features
 
 ### Basic example
