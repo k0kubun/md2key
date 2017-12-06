@@ -1,6 +1,6 @@
 require 'md2key/config_builder'
-require 'md2key/converter'
 require 'md2key/parser'
+require 'md2key/renderer'
 require 'thor'
 require 'yaml'
 
@@ -12,7 +12,7 @@ module Md2key
 
       markdown = File.read(path)
       ast = Parser.new.parse(markdown)
-      Converter.new.convert!(ast)
+      Renderer.new.render!(ast)
     end
 
     desc 'init', 'Put .md2key template to current directory'

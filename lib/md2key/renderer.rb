@@ -2,7 +2,7 @@ require 'md2key/configuration'
 require 'md2key/keynote'
 
 module Md2key
-  class Converter
+  class Renderer
     attr_reader :config
 
     def initialize
@@ -10,7 +10,7 @@ module Md2key
     end
 
     # @param [Md2key::Nodes::Presentation] ast
-    def convert!(ast)
+    def render!(ast)
       prepare_document_base
       generate_contents(ast)
     ensure
