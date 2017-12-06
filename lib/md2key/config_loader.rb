@@ -3,11 +3,13 @@ require 'md2key/configuration'
 module Md2key
   class ConfigLoader
     class << self
-      def load
-        config = {}
-        config.merge!(load_if_available(File.expand_path('~/.md2key')))
-        config.merge!(load_if_available(File.expand_path('./.md2key')))
-        Configuration.new(symbolize_keys(config))
+      # @param [Array<String>] paths - paths of YAML configs. Latter config overwrites former ones.
+      def load(*paths)
+        hash = {}
+        paths.each do |path|
+          hash.merge!(load_if_available(File.expand_path(path)))
+        end
+        Configuration.new(symbolize_keys(hash))
       end
 
       private

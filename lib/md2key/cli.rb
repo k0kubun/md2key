@@ -12,7 +12,7 @@ module Md2key
       abort "md2key: `#{path}` does not exist" unless File.exist?(path)
 
       markdown = File.read(path)
-      config = ConfigLoader.load
+      config = ConfigLoader.load('~/.md2key', './.md2key')
       ast = Parser.new.parse(markdown)
       Renderer.new(config).render!(ast)
     end
