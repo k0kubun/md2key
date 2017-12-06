@@ -1,3 +1,8 @@
+# v0.9.0
+
+- Use master slides named "cover", "h1", "h2", ...
+  - See https://github.com/k0kubun/md2key/pull/46 for details
+
 # v0.8.4
 
 - Add `md2key listen` subcommand to update Keynote by watching file
