@@ -3,10 +3,8 @@ require 'md2key/keynote'
 
 module Md2key
   class Renderer
-    attr_reader :config
-
-    def initialize
-      @config = Configuration.load
+    def initialize(config)
+      @config = config
     end
 
     # @param [Md2key::Nodes::Presentation] ast
@@ -28,9 +26,9 @@ module Md2key
       cover_master = Keynote.fetch_master_slide_name(1)
       main_master  = Keynote.fetch_master_slide_name(2)
 
-      Keynote.update_cover(ast.cover, config.cover_master || cover_master)
+      Keynote.update_cover(ast.cover, @config.cover_master || cover_master)
       ast.slides.each do |slide|
-        master = config.slide_master(slide.level) || main_master
+        master = @config.slide_master(slide.level) || main_master
         if slide.table
           Keynote.create_slide_with_table(slide, slide.table.rows, slide.table.columns, master)
           Keynote.insert_table(slide.table.data)

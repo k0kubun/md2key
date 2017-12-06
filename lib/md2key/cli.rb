@@ -11,8 +11,9 @@ module Md2key
       abort "md2key: `#{path}` does not exist" unless File.exist?(path)
 
       markdown = File.read(path)
+      config = Configuration.load
       ast = Parser.new.parse(markdown)
-      Renderer.new.render!(ast)
+      Renderer.new(config).render!(ast)
     end
 
     desc 'init', 'Put .md2key template to current directory'
