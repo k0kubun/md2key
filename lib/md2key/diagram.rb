@@ -1,3 +1,5 @@
+require 'tempfile'
+
 module Md2key
   class Diagram
     class << self
