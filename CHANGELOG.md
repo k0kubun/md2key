@@ -1,3 +1,7 @@
+# v0.9.3
+
+- Extended delay to insert indented list
+
 # v0.9.2
 
 - Fix error on rendering diagram
