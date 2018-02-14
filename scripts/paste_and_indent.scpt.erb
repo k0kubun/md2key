@@ -6,7 +6,7 @@ on run argv
   set insertNewline to item 2 of argv as boolean
 
   tell application "System Events"
-    delay 0.05 -- TODO: this should be configurable or removed
+    delay 0.1 -- TODO: this should be configurable or removed
 
     keystroke "v" using { command down }
 
