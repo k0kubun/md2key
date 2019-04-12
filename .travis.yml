@@ -1,7 +1,7 @@
 language: ruby
 os: osx
 cache: bundler
-rvm: 2.4.6
+rvm: 2.3.7
 branches:
   only:
     - master
