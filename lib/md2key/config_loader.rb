@@ -9,7 +9,7 @@ module Md2key
         paths.each do |path|
           hash.merge!(load_if_available(File.expand_path(path)))
         end
-        Configuration.new(symbolize_keys(hash))
+        Configuration.new(**symbolize_keys(hash))
       end
 
       private
