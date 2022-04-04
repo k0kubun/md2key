@@ -1,4 +1,4 @@
-# md2key [![Build Status](https://travis-ci.org/k0kubun/md2key.svg?branch=master)](https://travis-ci.org/k0kubun/md2key)
+# md2key [![Build Status](https://github.com/k0kubun/md2key/actions/workflows/main.yml/badge.svg)](https://github.com/k0kubun/md2key/actions)
 
 Convert your markdown to keynote.
 
@@ -29,7 +29,7 @@ gem install md2key
 
 ### Basic example
 
-The slides in the movie can be generated with following markdown.  
+The slides in the movie can be generated with following markdown.
 You can separate slides with `---` just for readability.
 
 ```markdown
@@ -58,7 +58,7 @@ You can separate slides with `---` just for readability.
 
 ### Insert source code
 
-If you have `highlight` command, you can insert syntax-highlighted source code.  
+If you have `highlight` command, you can insert syntax-highlighted source code.
 If you don't have it, execute `brew install highlight`.
 
 <img src='https://i.gyazo.com/7ff36be267652ab567191a6d5cae1d0f.png' width='60%'>
