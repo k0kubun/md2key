@@ -1,0 +1,36 @@
+name: test
+
+on: [push, pull_request]
+
+jobs:
+  tests:
+    strategy:
+      fail-fast: false
+
+      matrix:
+        os:
+         - macos-10.15
+         - macos-11.0
+
+        ruby-version:
+          - '2.3'
+          - '2.4'
+          - '2.5'
+          - '2.6'
+          - '2.7'
+          - '3.0'
+          - '3.1'
+          - ruby-head
+
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+
+      - run: |
+          bundle install
+          bundle exec exe/md2key # Test only syntax and basic functionality
+        continue-on-error: ${{ matrix.ruby-version == 'ruby-head' }}
