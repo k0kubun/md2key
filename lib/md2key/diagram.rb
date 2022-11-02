@@ -14,8 +14,9 @@ module Md2key
 
         output_dir = File.dirname(file.path)
         image_path = ""
-        IO.popen("mermaid #{file.path} | grep 'saved png' | awk -F':' '\{print $2\}'", 'r+') do |info|
-          image_path = info.read.strip
+        IO.popen("mmdc -i #{file.path} --output #{file.path}.png", 'r') do |info|
+          info.read
+          image_path = "#{file.path}.png"
           file.unlink
         end
 
@@ -25,9 +26,9 @@ module Md2key
       private
 
       def ensure_mermaid_availability
-        return if system('which -s mermaid')
+        return if system('which -s mmdc')
 
-        abort "`mermaid` is not available. Try `npm install -g phantomjs mermaid`."
+        abort "`mmdc` is not available. Try `npm install -g mermaid.cli`."
       end
     end
   end
