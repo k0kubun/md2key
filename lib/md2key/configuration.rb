@@ -17,7 +17,7 @@ module Md2key
 
     # @param [Array<Hash{ Symbol => String,Integer,TrueClass,FalseClass }>] masters
     def initialize(masters: [])
-      @masters = masters.map { |m| Master.new(m) }
+      @masters = masters.map { |m| Master.new(**m) }
       validate!
     end
 
