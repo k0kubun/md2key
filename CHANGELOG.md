@@ -1,3 +1,7 @@
+# v0.9.5
+
+- Fix keyword argument errors with slide theme selection for Ruby 3
+
 # v0.9.4
 
 - Fix keyword argument warnings for Ruby 2.7
