@@ -1,3 +1,7 @@
+# v0.10.1
+
+- Relax dependency version requirements
+
 # v0.10.0
 
 - Switch from `mermaid` to `mmdc` to support newer Mermaid
