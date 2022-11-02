@@ -4,5 +4,5 @@ source 'https://rubygems.org'
 gemspec
 
 if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("2.2.5")
-  gem 'listen', '~> 3.0'
+  gem 'listen', '>= 3.0'
 end
