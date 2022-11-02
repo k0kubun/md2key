@@ -1,3 +1,8 @@
+# v0.10.0
+
+- Switch from `mermaid` to `mmdc` to support newer Mermaid
+  https://github.com/k0kubun/md2key/pull/48
+
 # v0.9.5
 
 - Fix keyword argument errors with slide theme selection for Ruby 3
