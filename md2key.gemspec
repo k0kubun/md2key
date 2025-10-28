@@ -21,6 +21,9 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
+  # macOS system ruby is 2.6.10 as of darwin25
+  spec.required_ruby_version = '>= 2.6.0'
+
   spec.add_dependency 'thor', '>= 0.19'
   spec.add_dependency 'redcarpet', '>= 3.3'
   spec.add_dependency 'oga', '>= 1.2'
