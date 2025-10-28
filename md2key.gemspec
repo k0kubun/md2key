@@ -21,6 +21,8 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
+  spec.metadata['changelog_uri'] = "#{spec.homepage}/blob/v#{spec.version}/CHANGELOG.md"
+
   # macOS system ruby is 2.6.10 as of darwin25
   spec.required_ruby_version = '>= 2.6.0'
 
