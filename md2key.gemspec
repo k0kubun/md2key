@@ -26,5 +26,4 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'oga', '>= 1.2'
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
-  spec.add_development_dependency 'pry'
 end
