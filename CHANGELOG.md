@@ -1,3 +1,8 @@
+# v0.10.2
+
+- Bump required Ruby version to 2.6
+- Add `changelog_uri` to gem metadata
+
 # v0.10.1
 
 - Relax dependency version requirements
